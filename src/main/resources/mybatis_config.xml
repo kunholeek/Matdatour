@@ -1,1 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias alias="boarddto" type="com.matdatour.board.boardDTO" />
+		<typeAlias alias="commentdto" type="com.matdatour.comment.commentDTO" />
+		<typeAlias alias="contentdto" type="com.matdatour.contents.contentDTO" />
+		<typeAlias alias="userdto" type="com.matdatour.user.userDTO" />
+		<typeAlias alias="admindto" type="com.matdatour.admin.adminDTO" />
+	</typeAliases>
+</configuration>

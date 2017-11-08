@@ -1,7 +1,8 @@
 package com.matdatour.admin;
+ 
 
-public interface AdminService {
-
+public interface AdminDAO {
+	
 	public AdminDTO selectByAdminID(String admin_id);
 
 }

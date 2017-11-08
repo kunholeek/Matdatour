@@ -2,8 +2,7 @@ package com.matdatour.board;
 
 import java.util.List;
 
-public interface BoardService {
-	
+public interface BoardDAO {
 	
 	public List<BoardDTO> selectAll();
 
@@ -13,10 +12,10 @@ public interface BoardService {
 	
 	public BoardDTO selectByNickname(String nickname); 
 */
-	public int serv_boardInsert(BoardDTO board);
+	public int boardInsert(BoardDTO boarddto);
 
-	public int serv_boardUpdate(BoardDTO board);
+	public int boardUpdate(BoardDTO boarddto);
 
-	public int serv_boardDelete(int board_num); 
-
+	public int boardDelete(int board_num); 
+	 
 }
