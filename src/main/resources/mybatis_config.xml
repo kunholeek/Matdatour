@@ -4,10 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias alias="boarddto" type="com.matdatour.board.boardDTO" />
-		<typeAlias alias="commentdto" type="com.matdatour.comment.commentDTO" />
-		<typeAlias alias="contentdto" type="com.matdatour.contents.contentDTO" />
-		<typeAlias alias="userdto" type="com.matdatour.user.userDTO" />
-		<typeAlias alias="admindto" type="com.matdatour.admin.adminDTO" />
+		<typeAlias alias="boarddto" type="com.matdatour.board.BoardDTO" />
+		<typeAlias alias="commentdto" type="com.matdatour.comment.CommentDTO" />
+		<typeAlias alias="contentdto" type="com.matdatour.contents.ContentDTO" />
+		<typeAlias alias="userdto" type="com.matdatour.user.UserDTO" />
+		<typeAlias alias="admindto" type="com.matdatour.admin.AdminDTO" />
 	</typeAliases>
 </configuration>

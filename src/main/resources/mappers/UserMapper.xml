@@ -3,10 +3,40 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.matdatour.user">
+
+	<!-- 로그인 체크 -->
+	<select id="loginCheck" resultType="String">
+		select user_nick from
+		mat_user
+		where user_id = #{user_id} and user_pwd = #{user_pwd}
+	</select>
+
+	<select id="viewUser" resultType="userdto">
+		SELECT
+		user_id,
+		user_nick,
+		user_phone
+		FROM mat_user
+		WHERE user_id = #{user_id} AND user_pwd =
+		#{user_pwd}
+	</select>
+
+
+	<!-- 유저 등록 -->
+	<insert id="userInsert" parameterType="userdto">
+		insert into
+		mat_user(user_num, user_id,
+		user_pwd, user_nick, user_phone
+		)
+		values(user_seq.nextval,#{user_id},#{user_pwd},#{user_nick},#{user_phone})
+	</insert>
+
+	<!-- 유저 리스트 -->
 	<select id="selectAllUser" resultType="userdto">
 		select user_num, user_id,
 		user_pwd, user_nick, user_phone
 		from mat_user
+		order by user_num
 	</select>
 
 	<select id="selectByUserId" resultType="userdto" parameterType="String">
@@ -17,13 +47,6 @@
 		user_id=#{aa}
 	</select>
 
-	<insert id="userInsert" parameterType="userdto">
-		insert into
-		mat_user(user_num, user_id,
-		user_pwd, user_nick, user_phone
-		)
-		values(#{user_id},#{user_pwd},#{user_nick},#{user_phone})
-	</insert>
 
 	<update id="userUpdate" parameterType="userdto">
 		update mat_user set

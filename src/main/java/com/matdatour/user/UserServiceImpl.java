@@ -2,33 +2,33 @@ package com.matdatour.user;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-
 @Service("userservice")
-public class UserServiceImpl implements UserService{
-	
+public class UserServiceImpl implements UserService {
+
 	@Autowired
 	@Qualifier("userdao")
 	UserDAO user;
 
 	public UserServiceImpl() {
 	}
-	
-	public UserServiceImpl(UserDAO user){
+
+	public UserServiceImpl(UserDAO user) {
 		this.user = user;
 	}
-	
-	public void setDao(UserDAO user){
+
+	public void setDao(UserDAO user) {
 		this.user = user;
 	}
-	
-	
+
 	@Override
-	public List<UserDTO> selectAll() {
-		return user.selectAll();
+	public List<UserDTO> selectAllUser() {
+		return user.selectAllUser();
 	}
 
 	@Override
@@ -49,6 +49,32 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public int serv_userDelete(int user_num) {
 		return user.userDelete(user_num);
+	}
+	
+	//1. 회원 로그인 체크 
+	@Override
+	public boolean loginCheck(UserDTO userdto, HttpSession session) {
+		boolean result = user.loginCheck(userdto);
+		if (result) { //true일 경우 세션에 등록
+			UserDTO userdto2 = viewUser(userdto);
+			//세션 변수 등록 
+			session.setAttribute("user_id", userdto2.getUser_id());
+			session.setAttribute("user_nick", userdto2.getUser_nick());
+		}
+		return result;
+	}
+	//2. 회원 로그인 정보 
+	@Override
+	public UserDTO viewUser(UserDTO userdto) { 
+		return user.viewUser(userdto);
+	}
+	//3. 회원 로그아웃
+	@Override
+	public void logout(HttpSession session) {
+		 // 세션 변수 개별 삭제
+        // session.removeAttribute("userId");
+        // 세션 정보를 초기화 시킴
+		session.invalidate();
 	}
 
 }

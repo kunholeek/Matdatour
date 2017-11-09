@@ -36,4 +36,9 @@ public class HomeController {
 		return "home";
 	}
 	
+	@RequestMapping("/a")
+	public void test(Model model){
+		model.addAttribute("serverTime");
+		System.out.println("Aaaaaaaaaa");
+	}
 }

@@ -2,30 +2,34 @@ package com.matdatour.user;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository("userdao")
 public class UserDAOImpl implements UserDAO {
-	
+
 	@Autowired
 	SqlSession sqlSession;
 
 	String namespace = "com.matdatour.user.";
-
+	
+	
+	//1. íšŒì› ëª©ë¡
 	@Override
-	public List<UserDTO> selectAll() {
-		System.out.println("¸ğµÎÁ¶È¸:" + sqlSession);
+	public List<UserDTO> selectAllUser() {
 		return sqlSession.selectList(namespace + "selectAllUser");
 	}
 
 	@Override
 	public UserDTO selectByID(String user_id) {
-		System.out.println("user_idÀ¸·Î È¸¿ø Á¶È¸:" + user_id);
+		System.out.println(user_id);
 		return sqlSession.selectOne(namespace + "selectByUserId", user_id);
 	}
-
+	
+	//íšŒì› ë“±ë¡
 	@Override
 	public int userInsert(UserDTO userdto) {
 		return sqlSession.insert(namespace + "userInsert", userdto);
@@ -39,6 +43,25 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public int userDelete(int user_num) {
 		return sqlSession.delete(namespace + "userDelete", user_num);
+	}
+
+	//ë¡œê·¸ì¸ ì²´í¬
+	@Override
+	public boolean loginCheck(UserDTO userdto) {
+		String name = sqlSession.selectOne(namespace + "loginCheck", userdto);
+		return (name == null) ? false : true;
+	}
+
+	@Override
+	public UserDTO viewUser(UserDTO userdto) {
+		return sqlSession.selectOne(namespace + "viewUser", userdto);
+	}
+	
+	//ë¡œê·¸ì•„ì›ƒ
+	@Override
+	public void logout(HttpSession session) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.matdatour.contents">
 
-	<insert id="contentInsert" parameterType="contentdao">
+	<insert id="contentInsert" parameterType="contentdto">
 		insert into
 		mat_comment(c_num, c_comment,
 		c_date, board_num, board_group,
@@ -12,7 +12,7 @@
 		values(#{c_num},#{c_comment},sysdate,#{board_num},#{board_group},#{user_num})
 	</insert>
 
-	<update id="contentUpdate" parameterType="contentdao">
+	<update id="contentUpdate" parameterType="contentdto">
 		update mat_comment set
 		c_comment=#{c_comment}, c_date=sysdate
 	</update>
