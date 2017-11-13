@@ -57,7 +57,9 @@ public class UserServiceImpl implements UserService {
 		boolean result = user.loginCheck(userdto);
 		if (result) { //true일 경우 세션에 등록
 			UserDTO userdto2 = viewUser(userdto);
-			//세션 변수 등록 
+			//세션 변수 등록
+			
+			session.setAttribute("user_num", userdto2.getUser_num());
 			session.setAttribute("user_id", userdto2.getUser_id());
 			session.setAttribute("user_nick", userdto2.getUser_nick());
 		}

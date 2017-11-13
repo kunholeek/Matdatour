@@ -29,14 +29,28 @@ public class BoardServiceImpl implements BoardService {
 		return board.selectAll();
 	}
 
-	@Override
-	public BoardDTO selectByNum(int board_num) {
-		return board.selectByNum(board_num);
-	}
-
+	/*
+	 * @Override public BoardDTO selectByNum(int board_num) { return
+	 * board.selectByNum(board_num); }
+	 */
 	@Override
 	public int serv_boardInsert(BoardDTO boarddto) {
-		return board.boardInsert(boarddto);
+		String title = boarddto.getTitle();
+		String content = boarddto.getM_content();
+
+		  // *태그문자 처리 (< ==> &lt; > ==> &gt;)
+        // replace(A, B) A를 B로 변경
+        title = title.replace("<", "&lt;");
+        title = title.replace(">", "&gt;");
+        // *공백문자 처리
+        title = title.replace("  ",    "&nbsp;&nbsp;");
+        content = content.replace("\n", "<br>");
+        boarddto.setTitle(title);
+        boarddto.setM_content(content);
+       
+        //board.boardInsert(boarddto);
+        
+        return board.boardInsert(boarddto);
 	}
 
 	@Override
@@ -47,6 +61,11 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int serv_boardDelete(int board_num) {
 		return board.boardDelete(board_num);
+	}
+
+	@Override
+	public BoardDTO detailView(int board_num) throws Exception {
+		return board.detailView(board_num);
 	}
 
 }

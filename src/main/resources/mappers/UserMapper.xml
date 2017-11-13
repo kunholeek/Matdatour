@@ -5,14 +5,25 @@
 <mapper namespace="com.matdatour.user">
 
 	<!-- 로그인 체크 -->
-	<select id="loginCheck" resultType="String">
-		select user_nick from
-		mat_user
-		where user_id = #{user_id} and user_pwd = #{user_pwd}
+	<select id="loginCheck" resultType="userdto">
+		SELECT
+		user_num,
+		user_id,
+		user_nick,
+		user_phone
+		FROM mat_user
+		WHERE user_id = #{user_id} AND user_pwd =
+		#{user_pwd}
+		
+		<!-- SELECT
+		user_nick
+		WHERE user_id = #{user_id} AND user_pwd =
+		#{user_pwd} -->
 	</select>
 
 	<select id="viewUser" resultType="userdto">
 		SELECT
+		user_num,
 		user_id,
 		user_nick,
 		user_phone

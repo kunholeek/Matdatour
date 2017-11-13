@@ -4,30 +4,44 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.matdatour.board">
 	<select id="selectAll" resultType="boarddto">
-		select board_num, board_group,
-		board_date, title, recommend, user_num
+		select board_num,board_group,
+		board_date, title, recommend,m_content,m_image, user_num
 		from mat_board
+		where board_group
+		= #{aa}
+		order by
+		board_num desc,
+		board_date desc
 	</select>
 
-	<select id="selectByNum" resultType="boarddto" parameterType="int">
-		select board_num, board_group,
-		board_date, title, recommend, user_num
-		from mat_board
-		where
-		board_num=#{aa}
+	<!-- <select id="selectByNum" resultType="boarddto" parameterType="int"> 
+		select board_num, board_group, board_date, title, recommend, user_num from 
+		mat_board where board_num=#{aa} </select> -->
+
+	<!--03. 게시글 상세보기 조회 -->
+	<select id="detailView" resultType="boarddto">
+		SELECT * FROM mat_board
+		WHERE board_num = #{board_num}
 	</select>
 
+
+	<!-- 게시글 작성 -->
 	<insert id="boardInsert" parameterType="boarddto">
 		insert into
 		mat_board(board_num, board_group,
-		board_date, title, recommend,
+		board_date, title,
+		recommend,m_content,m_image,
 		user_num)
-		values(#{board_num},#{board_group},sysdate,#{title},0,#{user_num})
+		values(board_seq.nextval,#{board_group},sysdate,#{title},0,#{m_content},
+		#{m_image, jdbcType=VARCHAR},#{user_num})
 	</insert>
 
+	<!-- 게시글 수정 처리 -->
 	<update id="boardUpdate" parameterType="boarddto">
 		update mat_board set
-		board_group=#{board_group}, board_date=sysdate, title=#{title}
+		board_group=#{board_group}, board_date=sysdate,
+		title=#{title},#{m_content},#{m_image}
+		where board_num = #{board_num}
 	</update>
 
 	<delete id="boardDelete" parameterType="int">
@@ -37,6 +51,9 @@
 		and
 		user_num=#{user_num}
 	</delete>
+
+
+
 </mapper>
 
 

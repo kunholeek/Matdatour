@@ -48,8 +48,8 @@ public class UserDAOImpl implements UserDAO {
 	//로그인 체크
 	@Override
 	public boolean loginCheck(UserDTO userdto) {
-		String name = sqlSession.selectOne(namespace + "loginCheck", userdto);
-		return (name == null) ? false : true;
+		UserDTO user2 = sqlSession.selectOne(namespace + "loginCheck", userdto);
+		return (user2 == null) ? false : true;
 	}
 
 	@Override

@@ -1,0 +1,47 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<title>게시글 목록</title>
+<script>
+	$(document).ready(function() {
+		$("#btnWrite").click(function() {
+			// 페이지 주소 변경(이동)
+			location.href = "board/write.do";
+		});
+	});
+</script>
+</head>
+<body>
+	<%@ include file="menu.jsp"%>
+	<h2>게시글 목록</h2>
+	<button type="button" id="btnWrite">글쓰기</button>
+	<table border="1" width="600px">
+		<tr>
+			<th>제목</th>
+			<th>닉네임</th>
+			<th>작성일</th> 
+			<!-- <th>평점</th> -->
+		</tr>
+		<c:forEach var="row" items="${list}">
+		    <c:forEach var="row2" items="${row.boardList}">
+			<tr> 
+				<td><a href="view.do?board_num=${row2.board_num}">${row2.title}</a></td>
+				<td>${row.user_nick}</td> 
+				<td>
+					<!-- 원하는 날짜형식으로 출력하기 위해 fmt태그 사용 --> <fmt:formatDate
+						value="${row2.board_date}" pattern="yyyy-MM-dd HH:mm:ss" />
+				</td>
+				<!--  평점 구축 예정 -->
+				<!-- <td></td> -->
+			</tr>
+		</c:forEach>
+		</c:forEach>
+	</table>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.matdatour.score">
+
+	<!-- 유저 리스트 -->
+	<select id="selectAllScore" resultType="scoredto">
+		select user_num,
+		board_num,
+		m_star
+		from mat_score
+		order by board_num
+	</select>
+
+	<select id="selectByScore" resultType="scoredto" parameterType="int">
+		select user_num,
+		board_num, m_star
+		from mat_score
+		where
+		board_num=#{aa}
+	</select>
+
+	<insert id="scoreInsert" parameterType="scoredto">
+		insert into
+		mat_score(user_num, board_num,
+		m_star)
+		values(#{user_num},#{board_num},#{m_star})
+	</insert>
+	
+	<update id="scoreUpdate" parameterType="scoredto">
+		update mat_score set
+		user_num=#{user_num}, board_num=#{board_num}, m_star=#{m_star}
+	</update>
+
+	<delete id="scoreDelete" parameterType="int">
+		delete from mat_score
+		where
+		user_num=#{user_num}
+		and
+		board_num=#{board_num}
+	</delete>
+	
+	<select id="scoreAvgByID" resultType="scoredto" parameterType="int">
+		select user_num,
+		,avg(m_star)
+		from mat_score
+		where user_num =#{user_num}
+		group by user_num
+		order by 2 desc
+	</select>
+	<select id="scoreAvgByBoard" resultType="scoredto" parameterType="int">
+		select board_num,
+		,avg(m_star)
+		from mat_score
+		where board_num=#{board_num}
+		group by board_num
+		order by 2 desc
+	</select>
+</mapper>
+

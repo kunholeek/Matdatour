@@ -37,6 +37,7 @@ public class UserController {
 		boolean result = userService.loginCheck(userdto, session);
 		ModelAndView mav = new ModelAndView();
 		if (result == true) {// 로그인 성공
+			session.setAttribute("user", userdto);
 			// main.jsp로 이동
 			mav.setViewName("home");
 			mav.addObject("msg", "success");

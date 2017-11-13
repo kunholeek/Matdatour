@@ -16,15 +16,15 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public List<BoardDTO> selectAll() {
-		System.out.println("¸ğµÎÁ¶È¸:" + sqlSession);
+		System.out.println(sqlSession);
 		return sqlSession.selectList(namespace + "selectAll");
 	}
 
-	@Override
-	public BoardDTO selectByNum(int board_num) {
-		System.out.println("board_numÀ¸·Î °Ô½Ã±Û Á¶È¸:" + board_num);
-		return sqlSession.selectOne(namespace + "selectByNum", board_num);
-	}
+	/*
+	 * @Override public BoardDTO selectByNum(int board_num) {
+	 * System.out.println("board_numï¿½ï¿½ï¿½ï¿½ ï¿½Ô½Ã±ï¿½ ï¿½ï¿½È¸:" + board_num); return
+	 * sqlSession.selectOne(namespace + "selectByNum", board_num); }
+	 */
 
 	@Override
 	public int boardInsert(BoardDTO boarddto) {
@@ -42,6 +42,12 @@ public class BoardDAOImpl implements BoardDAO {
 	public int boardDelete(int board_num) {
 		return sqlSession.delete(namespace + "boardDelete", board_num);
 
+	}
+	
+	//ê²Œì‹œê¸€ ìƒì„¸ë³´ê¸° 
+	@Override
+	public BoardDTO detailView(int board_num) throws Exception {
+		return sqlSession.selectOne(namespace + "detailView", board_num);
 	}
 
 }

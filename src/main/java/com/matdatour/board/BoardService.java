@@ -7,8 +7,9 @@ public interface BoardService {
 	
 	public List<BoardDTO> selectAll();
 
-	public BoardDTO selectByNum(int board_num);
+/*	public BoardDTO selectByNum(int board_num);*/
 	
+	public BoardDTO detailView(int board_num) throws Exception;
 	/*public BoardDTO selectByTitle(String title); 
 	
 	public BoardDTO selectByNickname(String nickname); 

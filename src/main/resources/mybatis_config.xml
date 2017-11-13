@@ -6,8 +6,9 @@
 	<typeAliases>
 		<typeAlias alias="boarddto" type="com.matdatour.board.BoardDTO" />
 		<typeAlias alias="commentdto" type="com.matdatour.comment.CommentDTO" />
-		<typeAlias alias="contentdto" type="com.matdatour.contents.ContentDTO" />
 		<typeAlias alias="userdto" type="com.matdatour.user.UserDTO" />
 		<typeAlias alias="admindto" type="com.matdatour.admin.AdminDTO" />
+		<typeAlias alias="scoredto" type="com.matdatour.score.ScoreDTO" />
+		<typeAlias alias="joindto" type="com.matdatour.user_board_join.JoinDTO" />
 	</typeAliases>
 </configuration>

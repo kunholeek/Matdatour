@@ -5,20 +5,20 @@
 <mapper namespace="com.matdatour.comment">
 	<select id="selectAllComment" resultType="commentdto">
 		select c_num, c_comment,
-		c_date, board_num, board_group, user_num
+		c_date, board_num, user_num
 		from mat_comment
 	</select>
 
 
-	<insert id="commentInsert" parameterType="boarddto">
+	<insert id="commentInsert" parameterType="commentdto">
 		insert into
 		mat_comment(c_num, c_comment,
-		c_date, board_num, board_group,
+		c_date, board_num, 
 		user_num)
-		values(#{c_num},#{c_comment},sysdate,#{board_num},#{board_group},#{user_num})
+		values(#{c_num},#{c_comment},sysdate,#{board_num},#{user_num})
 	</insert>
 
-	<update id="commentUpdate" parameterType="boarddto">
+	<update id="commentUpdate" parameterType="commentdto">
 		update mat_comment set
 		c_comment=#{c_comment}, c_date=sysdate
 	</update>
