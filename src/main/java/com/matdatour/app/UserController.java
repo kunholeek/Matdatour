@@ -29,7 +29,13 @@ public class UserController {
 	public String login() {
 		return "login";
 	}
-
+	@RequestMapping("/home.do")
+	public ModelAndView home(){
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("msg", "success");
+		mav.setViewName("home");
+		return mav;
+	}
 	// 2. 로그인 처리
 
 	@RequestMapping("/loginCheck.do")
@@ -77,7 +83,7 @@ public class UserController {
 	@RequestMapping("/insert.do")
 	public String userInsert(@ModelAttribute UserDTO userdto) {
 		userService.serv_userInsert(userdto);
-		return "redirect:list.do";
+		return "redirect:login.do";
 	}
 
 }

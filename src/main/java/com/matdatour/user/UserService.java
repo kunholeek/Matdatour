@@ -21,5 +21,7 @@ public interface UserService {
 	//회원 정보 
 	public void logout(HttpSession session);
 	 //회원 로그아웃
+	
+	public UserDTO selectByUserNum(int user_num);
 	 
 }

@@ -57,6 +57,13 @@
 		where
 		user_id=#{aa}
 	</select>
+	<select id="selectByUserNum" resultType="userdto" parameterType="int">
+		select user_id,
+		user_pwd, user_nick, user_phone
+		from mat_user
+		where
+		user_num=#{aa}
+	</select>
 
 
 	<update id="userUpdate" parameterType="userdto">

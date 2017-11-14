@@ -24,7 +24,7 @@
 		WHERE board_num = #{board_num}
 	</select>
 
-
+	
 	<!-- 게시글 작성 -->
 	<insert id="boardInsert" parameterType="boarddto">
 		insert into

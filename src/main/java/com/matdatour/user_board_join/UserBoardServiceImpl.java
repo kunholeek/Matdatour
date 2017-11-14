@@ -6,15 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class JoinServiceImpl implements JoinService {
+public class UserBoardServiceImpl implements UserBoardService {
 
 	@Autowired
-	JoinDAO joindao;
+	UserBoardDAO userboarddao;
 
 	@Override
-	public List<JoinDTO> listAll(String board_group) throws Exception {
-		return joindao.listAll(board_group);
+	public List<UserBoardDTO> listAll(String board_group) throws Exception {
+		return userboarddao.listAll(board_group);
 	}
- 
 
 }

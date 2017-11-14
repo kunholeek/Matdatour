@@ -12,7 +12,7 @@
 	$(document).ready(function() {
 		$("#btnWrite").click(function() {
 			// 페이지 주소 변경(이동)
-			location.href = "board/write.do";
+			location.href = "write.do";
 		});
 	});
 </script>
@@ -21,27 +21,32 @@
 	<%@ include file="menu.jsp"%>
 	<h2>게시글 목록</h2>
 	<button type="button" id="btnWrite">글쓰기</button>
+	
+	
+	<form action="list.do" method="get">
 	<table border="1" width="600px">
 		<tr>
 			<th>제목</th>
 			<th>닉네임</th>
-			<th>작성일</th> 
+			<th>작성일</th>  
 			<!-- <th>평점</th> -->
 		</tr>
-		<c:forEach var="row" items="${list}">
-		    <c:forEach var="row2" items="${row.boardList}">
+	  <c:set var="num" value="0"></c:set> 
+		<c:forEach var="row" items="${board_list}">
 			<tr> 
-				<td><a href="view.do?board_num=${row2.board_num}">${row2.title}</a></td>
+				<td><a href="view.do?board_num=${row.board_num}&user_nick=${row.user_nick}">${row.title}</a></td>
 				<td>${row.user_nick}</td> 
 				<td>
 					<!-- 원하는 날짜형식으로 출력하기 위해 fmt태그 사용 --> <fmt:formatDate
-						value="${row2.board_date}" pattern="yyyy-MM-dd HH:mm:ss" />
+						value="${row.board_date}" pattern="yyyy-MM-dd HH:mm:ss" />
 				</td>
 				<!--  평점 구축 예정 -->
 				<!-- <td></td> -->
 			</tr>
-		</c:forEach>
+			   <c:set var="num" value="${ num+1}"></c:set>
+	<c:if test="${num%5==0}"><br></c:if> 
 		</c:forEach>
 	</table>
+	</form>
 </body>
 </html>

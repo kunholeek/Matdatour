@@ -79,4 +79,10 @@ public class UserServiceImpl implements UserService {
 		session.invalidate();
 	}
 
+	@Override
+	public UserDTO selectByUserNum(int user_num) {
+		// TODO Auto-generated method stub
+		return user.selectByUserNum(user_num);
+	}
+
 }

@@ -10,5 +10,6 @@
 		<typeAlias alias="admindto" type="com.matdatour.admin.AdminDTO" />
 		<typeAlias alias="scoredto" type="com.matdatour.score.ScoreDTO" />
 		<typeAlias alias="joindto" type="com.matdatour.user_board_join.JoinDTO" />
+		<typeAlias alias="userboarddto" type="com.matdatour.user_board_join.UserBoardDTO" />
 	</typeAliases>
 </configuration>

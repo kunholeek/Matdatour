@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%@ include file="menu.jsp"%>
 	<h2>회원등록폼</h2>
 	<form name="signup" method="post" action="insert.do">
 		<table border="1" width="400px">

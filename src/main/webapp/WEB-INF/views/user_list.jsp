@@ -8,6 +8,7 @@
 <title>회원 목록</title>
 </head>
 <body>
+<%@ include file="menu.jsp"%>
 	<h2>회원 목록</h2>
 	<input type="button" value="회원등록"
 		onclick="location.href='write.do'">

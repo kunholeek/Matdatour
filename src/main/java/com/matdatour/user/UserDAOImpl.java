@@ -64,4 +64,10 @@ public class UserDAOImpl implements UserDAO {
 
 	}
 
+	@Override
+	public UserDTO selectByUserNum(int user_num) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace + "selectByUserId", user_num);
+	}
+
 }

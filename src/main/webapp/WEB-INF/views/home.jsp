@@ -13,8 +13,8 @@
 <body>
 	<%@ include file="menu.jsp"%>
 	<c:if test="${msg == 'success'}">
-		<h2>${sessionScope.user_num } ${sessionScope.user_nick}(${sessionScope.user_id})님환영합니다.</h2>
+		<h2> ${sessionScope.user_nick}(${sessionScope.user_id})님환영합니다.</h2>
 	</c:if>
-	<%=request.getSession().getAttribute("user_nick")%>
+	<%-- <%=request.getSession().getAttribute("user_nick")%> --%>
 </body>
 </html>

@@ -6,7 +6,7 @@ public interface BoardDAO {
 
 	public List<BoardDTO> selectAll();
 
-	/*public BoardDTO selectByNum(int board_num);*/
+	/* public BoardDTO selectByNum(int board_num); */
 
 	// 게시글 상세보기
 	public BoardDTO detailView(int board_num) throws Exception;

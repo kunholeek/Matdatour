@@ -1,0 +1,9 @@
+package com.matdatour.user_board_join;
+
+import java.util.List;
+
+public interface UserBoardService {
+	
+	public List<UserBoardDTO> listAll(String board_group) throws Exception;
+
+}

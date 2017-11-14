@@ -4,25 +4,36 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.matdatour.user_board_join">
 
-	<resultMap id ="get-result" type="joindto">
-		<result property="user_num" column="user_num"/>
-		<result property="user_nick" column="user_nick"/>
-		<collection property="boardList"     javaType="list"  column="user_num" select="getJoinTest2ById"/>
+	<resultMap id="get-result" type="joindto">
+		<result property="user_num" column="user_num" />
+		<result property="user_nick" column="user_nick" />
+		<collection property="boardList" javaType="list" column="user_num"
+			select="getJoinTest2ById" />
+
 	</resultMap>
-	
-	
-	<select id="getJoinTestAll"   resultMap="get-result">
-		select user_num, user_nick from mat_user  
+
+
+	<select id="getJoinTestAll" resultMap="get-result"
+		parameterType="string">
+		select user_num, user_nick from mat_user
 	</select>
-	
 	<select id="getJoinByUser_num" parameterType="int" resultMap="get-result">
 		select * from mat_user where user_num = #{user_num}
 	</select>
-	
-	
-	
 	<select id="getJoinTest2ById" parameterType="int" resultType="boarddto">
 		select * from mat_board where user_num=#{user_num}
 	</select>
+
+
+	<select id="listAll" resultType="userboarddto"
+		parameterType="string">
+		select mu.user_num, mu.user_nick, mb.title,
+		mb.board_num, mb.board_date, mb.recommend, mb.m_content, mb.m_image
+		from mat_board mb, mat_user mu
+		where mu.user_num = mb.user_num
+		and
+		mb.board_group=#{board_group}
+	</select>
+
 
 </mapper>

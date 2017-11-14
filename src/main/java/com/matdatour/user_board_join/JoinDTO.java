@@ -14,9 +14,11 @@ public class JoinDTO {
 		super();
 	}
 
-	public JoinDTO(String user_num, String user_nick, List<BoardDTO> boardList) {
+	public JoinDTO(String user_num , String user_nick,
+			List<BoardDTO> boardList) {
 		super();
 		this.user_num = user_num;
+ 
 		this.user_nick = user_nick;
 		this.boardList = boardList;
 	}
@@ -29,6 +31,7 @@ public class JoinDTO {
 		this.user_num = user_num;
 	}
 
+	 
 	public String getUser_nick() {
 		return user_nick;
 	}
