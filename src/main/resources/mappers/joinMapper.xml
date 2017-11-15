@@ -33,6 +33,7 @@
 		where mu.user_num = mb.user_num
 		and
 		mb.board_group=#{board_group}
+		order by board_num desc
 	</select>
 
 

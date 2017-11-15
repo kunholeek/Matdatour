@@ -32,7 +32,7 @@
 		board_date, title,
 		recommend,m_content,m_image,
 		user_num)
-		values(board_seq.nextval,#{board_group},sysdate,#{title},0,#{m_content},
+		values(board_seq.nextval,#{board_group},TO_CHAR(TO_DATE(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')),#{title},0,#{m_content},
 		#{m_image, jdbcType=VARCHAR},#{user_num})
 	</insert>
 
