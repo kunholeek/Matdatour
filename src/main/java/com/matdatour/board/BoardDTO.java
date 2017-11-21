@@ -2,6 +2,8 @@ package com.matdatour.board;
 
 import java.sql.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class BoardDTO {
 
 	private int board_num;
@@ -12,13 +14,15 @@ public class BoardDTO {
 	private String m_content;
 	private String m_image;
 	private int user_num;
-	
+	 
+
 	public BoardDTO() {
 		super();
 	}
 
+	 
 	public BoardDTO(int board_num, String board_group, Date board_date, String title, int recommend, String m_content,
-			String m_image, int user_num) {
+			String m_image, int user_num ) {
 		super();
 		this.board_num = board_num;
 		this.board_group = board_group;
@@ -28,6 +32,7 @@ public class BoardDTO {
 		this.m_content = m_content;
 		this.m_image = m_image;
 		this.user_num = user_num;
+		 
 	}
 
 	public int getBoard_num() {
@@ -103,6 +108,5 @@ public class BoardDTO {
 				.append(", user_num=").append(user_num).append("]");
 		return builder.toString();
 	}
-
 
 }

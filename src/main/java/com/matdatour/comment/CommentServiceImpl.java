@@ -13,6 +13,8 @@ public class CommentServiceImpl implements CommentService {
 	@Qualifier("commentdao")
 	CommentDAO comment;
 	
+	
+	
 	public CommentServiceImpl() {
 	}
 	public CommentServiceImpl(CommentDAO comment) {
@@ -22,10 +24,12 @@ public class CommentServiceImpl implements CommentService {
 		this.comment = comment;
 	}
 	
+	
+	
 	@Override
-	public List<CommentDTO> selectAllComment() {
+	public List<CommentDTO> selectAllComment(int board_num) {
 		
-		return comment.selectAllComment();
+		return comment.selectAllComment(board_num);
 	}
 
 	@Override

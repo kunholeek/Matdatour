@@ -3,6 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+	 <settings>
+        <setting name="cacheEnabled" value="false" />
+        <setting name="jdbcTypeForNull" value="NULL" />
+    </settings>
 	<typeAliases>
 		<typeAlias alias="boarddto" type="com.matdatour.board.BoardDTO" />
 		<typeAlias alias="commentdto" type="com.matdatour.comment.CommentDTO" />
@@ -12,4 +16,9 @@
 		<typeAlias alias="joindto" type="com.matdatour.user_board_join.JoinDTO" />
 		<typeAlias alias="userboarddto" type="com.matdatour.user_board_join.UserBoardDTO" />
 	</typeAliases>
+	
+	
+
+ 
+
 </configuration>

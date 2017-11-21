@@ -8,16 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository("commentdao")
+
 public class CommentDAOImpl implements CommentDAO{
 
 	@Autowired
 	SqlSession sqlSession;
 
 	String namespace = "com.matdatour.comment.";
+	
 	@Override
-	public List<CommentDTO> selectAllComment() {
-		System.out.println("모두조회:" + sqlSession);
-		return sqlSession.selectList(namespace + "selectAllComment");
+	public List<CommentDTO> selectAllComment(int board_num) { 
+		return sqlSession.selectList("com.matdatour.user_board_join.selectAllComment",board_num);
 	}
 
 	@Override

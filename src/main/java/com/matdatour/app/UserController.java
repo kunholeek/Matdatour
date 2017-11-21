@@ -54,8 +54,8 @@ public class UserController {
 		return mav;
 	}
 
+	
 	// 3.로그아웃 처리
-
 	@RequestMapping("/logout.do")
 	public ModelAndView logout(HttpSession session) {
 		userService.logout(session);

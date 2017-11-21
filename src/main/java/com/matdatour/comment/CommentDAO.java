@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.util.List;
 
 public interface CommentDAO {
-	public List<CommentDTO> selectAllComment();
+	public List<CommentDTO> selectAllComment(int board_num);
 
 	public int commentInsert(CommentDTO commentdto);
 

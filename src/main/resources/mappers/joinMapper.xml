@@ -35,6 +35,16 @@
 		mb.board_group=#{board_group}
 		order by board_num desc
 	</select>
+	
+	
+
+	<select id="selectAllComment" resultType ="commentdto" parameterType="map">
+		select mc.c_num, mc.c_comment, mc.c_date, mb.board_num, mu.user_nick, mu.user_num
+		from mat_comment mc, mat_user mu, mat_board mb
+		where mc.board_num = mb.board_num and mu.user_num=#{user_num}
+		order by c_date asc
+	</select>
+
 
 
 </mapper>

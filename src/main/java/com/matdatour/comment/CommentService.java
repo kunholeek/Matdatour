@@ -3,7 +3,7 @@ package com.matdatour.comment;
 import java.util.List;
 
 public interface CommentService {
-	public List<CommentDTO> selectAllComment();
+	public List<CommentDTO> selectAllComment(int board_num);
 
 	public int serv_commentInsert(CommentDTO commentdto);
 

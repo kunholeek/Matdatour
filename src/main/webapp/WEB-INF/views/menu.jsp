@@ -33,7 +33,7 @@
 	$(document).ready(function() {
 		$("#menuLogin").click(function() {
 			// 페이지 주소 변경(이동)
-			location.href = "../user/login.do";
+			location.href = "user/login.do";
 		});
 	});
 </script>

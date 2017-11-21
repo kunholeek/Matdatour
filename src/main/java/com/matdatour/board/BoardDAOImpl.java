@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Repository("boarddao")
 public class BoardDAOImpl implements BoardDAO {
@@ -43,11 +44,16 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.delete(namespace + "boardDelete", board_num);
 
 	}
-	
-	//게시글 상세보기 
+
+	// 게시글 상세보기
 	@Override
 	public BoardDTO detailView(int board_num) throws Exception {
 		return sqlSession.selectOne(namespace + "detailView", board_num);
+	}
+
+	@Override
+	public String fileUpload(MultipartHttpServletRequest mRequest) {
+		return null;
 	}
 
 }

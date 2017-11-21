@@ -2,6 +2,8 @@ package com.matdatour.board;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 public interface BoardDAO {
 
 	public List<BoardDTO> selectAll();
@@ -21,5 +23,8 @@ public interface BoardDAO {
 	public int boardUpdate(BoardDTO boarddto);
 
 	public int boardDelete(int board_num);
+	
+	
+	public String fileUpload(MultipartHttpServletRequest mRequest);
 
 }
