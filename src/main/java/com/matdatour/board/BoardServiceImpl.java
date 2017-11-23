@@ -34,22 +34,19 @@ public class BoardServiceImpl implements BoardService {
 		return board.selectAll();
 	}
 
-	/*
-	 * @Override public BoardDTO selectByNum(int board_num) { return
-	 * board.selectByNum(board_num); }
-	 */
 	@Override
 	public int serv_boardInsert(BoardDTO boarddto) {
 
 		String title = boarddto.getTitle();
 		String content = boarddto.getM_content();
-		// *�깭洹몃Ц�옄 泥섎━ (< ==> &lt; > ==> &gt;)
-		// replace(A, B) A瑜� B濡� 蹂�寃�
-		title = title.replace("<", "&lt;");
-		title = title.replace(">", "&gt;");
-		// *怨듬갚臾몄옄 泥섎━
-		title = title.replace("  ", "&nbsp;&nbsp;");
-		content = content.replace("\n", "<br>");
+
+		title = title.replaceAll("<", "&lt;");
+		title = title.replaceAll(">", "&gt;");
+		title = title.replaceAll("  ", "&nbsp;&nbsp;");
+		
+		content = content.replaceAll("<", "&lt;");
+		content = content.replaceAll(">", "&gt;");
+		content = content.replaceAll("\n", "<br>");
 		boarddto.setTitle(title);
 		boarddto.setM_content(content);
 
@@ -58,6 +55,20 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int serv_boardUpdate(BoardDTO boarddto) {
+		
+		String title = boarddto.getTitle();
+		String content = boarddto.getM_content();
+
+		title = title.replaceAll("<", "&lt;");
+		title = title.replaceAll(">", "&gt;");
+		title = title.replaceAll("  ", "&nbsp;&nbsp;");
+		
+		content = content.replaceAll("<", "&lt;");
+		content = content.replaceAll(">", "&gt;");
+		content = content.replaceAll("\n", "<br>");
+		boarddto.setTitle(title);
+		boarddto.setM_content(content);
+		
 		return board.boardUpdate(boarddto);
 	}
 
@@ -76,7 +87,6 @@ public class BoardServiceImpl implements BoardService {
 		String isSuccess = null;
 
 		String uploadPath = mRequest.getRealPath("/upload/");
-		// �뾽濡쒕뱶�븳 �뙆�씪�쓣 �떞�븘�몮 怨�
 
 		File dir = new File(uploadPath);
 
@@ -97,8 +107,6 @@ public class BoardServiceImpl implements BoardService {
 			if (saveFileName != null && !saveFileName.equals("")) {
 				if (new File(uploadPath + saveFileName).exists()) {
 					saveFileName = System.currentTimeMillis()+"_"+saveFileName ;
-					// 留뚯빟 �씠誘� �뾽濡쒕뱶 �븳�뙆�씪怨� �씪移섑븯�떎硫� 湲곗〈 �뙆�씠 �씠由꾩뿉
-					// System.currentTimeMillis(); 異붽��븯�뿬 援щ텇
 				}
 
 				try {
@@ -116,5 +124,5 @@ public class BoardServiceImpl implements BoardService {
 		}
 		return isSuccess;
 	}
-
+	
 }

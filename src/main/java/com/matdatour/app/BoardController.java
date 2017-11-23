@@ -2,6 +2,7 @@ package com.matdatour.app;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.sql.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,39 +41,33 @@ public class BoardController {
 	// 2. 게시글 작성처리
 
 	@RequestMapping(value = "/board/insert.do", method = RequestMethod.POST)
-	public ModelAndView insert(MultipartHttpServletRequest mRequest ) throws Exception {
-		BoardDTO boarddto = new BoardDTO(); 
+	public String insert(MultipartHttpServletRequest mRequest) throws Exception {
+		BoardDTO boarddto = new BoardDTO();
 		ModelAndView mav = new ModelAndView();
 		String file = null;
-		//int board_num = Integer.parseInt(mRequest.getParameter("board_num"));
+		// int board_num = Integer.parseInt(mRequest.getParameter("board_num"));
 		String board_group = mRequest.getParameter("board_group");
 		String title = mRequest.getParameter("title");
-		String m_content = mRequest.getParameter("m_content"); 
+		String m_content = mRequest.getParameter("m_content");
 		int user_num = Integer.parseInt(mRequest.getParameter("user_num"));
 		String m_image = mRequest.getParameter("m_image");
 		file = boardService.fileUpload(mRequest);
-	 
-		
-		
-		System.out.println(board_group+"/"+title+"/"+m_content+"/"+user_num);
+
+		System.out.println("[그룹 :" + board_group + "] " + "[제목 : " + title + "] " + "[내용 : " + m_content + "] "
+				+ "[유저넘버 :" + user_num + "]");
 		boarddto.setBoard_group(board_group);
 		boarddto.setTitle(title);
 		boarddto.setM_content(m_content);
 		boarddto.setUser_num(user_num);
 		boarddto.setM_image(file);
-		
+
 		boardService.serv_boardInsert(boarddto);
 		mav.setViewName("home");
-		return mav;
+		String encodeResult = URLEncoder.encode(board_group, "UTF-8");
+
+		return "redirect:list.do?board_group=" + encodeResult;
 	}
 
- 
-
-	/*
-	 * @RequestMapping(value = "/board/insert.do", method = RequestMethod.POST)
-	 * public String insert(@ModelAttribute BoardDTO boarddto) throws Exception
-	 * { boardService.serv_boardInsert(boarddto); return "home"; }
-	 */
 	// 2. 게시글 상세 조회
 	@RequestMapping(value = "/board/view.do", method = RequestMethod.GET)
 	public ModelAndView view(@RequestParam int board_num, String user_nick) throws Exception {
@@ -87,18 +82,62 @@ public class BoardController {
 
 	}
 
-	// 게시물 수정
-	@RequestMapping(value = "/board/update.do", method = RequestMethod.POST)
-	public String update(@ModelAttribute BoardDTO boarddto) throws Exception {
-		boardService.serv_boardUpdate(boarddto);
-		return "home";
-
+	@RequestMapping("/board/boardUpdate.do")
+	public String boardUpdate() {
+		return "board_update";
 	}
 
+	// 게시물 수정
+	@RequestMapping(value = "/board/update.do", method = RequestMethod.POST)
+	public String update(MultipartHttpServletRequest mRequest) throws Exception {
+
+		BoardDTO boarddto = new BoardDTO();
+		ModelAndView mav = new ModelAndView();
+		String file = null;
+		
+		 int board_num = Integer.parseInt(mRequest.getParameter("board_num"));
+		String board_group = mRequest.getParameter("board_group");
+		String title = mRequest.getParameter("title");
+		String m_content = mRequest.getParameter("m_content");
+		int user_num = Integer.parseInt(mRequest.getParameter("user_num"));
+		String m_image = mRequest.getParameter("m_image");
+		file = boardService.fileUpload(mRequest);
+		System.out.println( m_image);
+		System.out.println(file);
+
+		System.out.println("[그룹 :" + board_group + "] " + "[제목 : " + title + "] " + "[내용 : " + m_content + "] "+
+						 "[유저넘버 :" + user_num + "]");
+		boarddto.setBoard_num(board_num);
+		boarddto.setBoard_group(board_group);
+		boarddto.setTitle(title);
+		boarddto.setM_content(m_content);
+		boarddto.setUser_num(user_num);
+		if(file!=null){
+			boarddto.setM_image(file);
+		}else{
+			boarddto.setM_image(m_image);
+		}
+		
+		
+		System.out.println("업데이트"+boarddto);
+		boardService.serv_boardUpdate(boarddto);
+		
+	
+		String encodeResult = URLEncoder.encode(board_group, "UTF-8");
+
+		return "redirect:list.do?board_group=" + encodeResult;
+	}
+
+	// 글삭제
 	@RequestMapping("/board/delete.do")
-	public String delete(@RequestParam int board_num) throws Exception {
+	public String delete(@RequestParam int board_num, String board_group) throws Exception {
+		System.out.println(board_num + "번 게시글 삭제" + board_group);
+
 		boardService.serv_boardDelete(board_num);
-		return "redirect:list.do";
+
+		String encodeResult = URLEncoder.encode(board_group, "UTF-8");
+
+		return "redirect:list.do?board_group=" + encodeResult;
 	}
 
 }

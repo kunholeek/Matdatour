@@ -51,8 +51,6 @@
 		delete from mat_board
 		where
 		board_num=#{board_num}
-		and
-		user_num=#{user_num}
 	</delete>
 
 
