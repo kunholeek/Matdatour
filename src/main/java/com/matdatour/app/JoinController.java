@@ -25,6 +25,7 @@ public class JoinController {
 	// 게시글 목록.
 	@RequestMapping(value="list.do", method=RequestMethod.GET)
 	public String list(String board_group, Model model) throws Exception {
+		System.out.println("list >> "+ board_group);
 		List<UserBoardDTO> list = userboardService.listAll(board_group);
 		model.addAttribute("board_list",list);
 		ModelAndView mav = new ModelAndView();
