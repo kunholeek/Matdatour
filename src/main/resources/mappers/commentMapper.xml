@@ -4,28 +4,23 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.matdatour.comment">
 
-   
-<!-- 	<select id="selectAllComment" resultType="commentdto">
-		select c_num,
-		c_comment,
-		c_date, board_num, user_num
-		from mat_comment 
-	</select>
 
-  -->
+	<!-- <select id="selectAllComment" resultType="commentdto"> select c_num, 
+		c_comment, c_date, board_num, user_num from mat_comment </select> -->
 	<!-- 댓글 입력 -->
-	<insert id="commentInsert" parameterType="commentdto">
+	<insert id="commentInsert">
 		insert into
-		mat_comment(c_num, c_comment,
-		c_date, board_num,
-		user_num)
-		values(#{c_num},#{c_comment},sysdate,#{board_num},#{user_num})
+		mat_comment(c_num,
+		board_num, user_num,
+		c_comment, c_replyer,regdate)
+		values(comment_seq.nextval,#{board_num},#{user_num},#{c_comment},#{c_replyer},sysdate
+		)
 	</insert>
 
 
 	<update id="commentUpdate" parameterType="commentdto">
 		update mat_comment set
-		c_comment=#{c_comment}, c_date=sysdate
+		c_comment=#{c_comment}
 	</update>
 
 

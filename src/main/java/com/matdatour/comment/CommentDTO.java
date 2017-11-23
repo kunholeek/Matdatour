@@ -3,37 +3,29 @@ package com.matdatour.comment;
 import java.sql.Date;
 
 public class CommentDTO {
-	
-	private int c_num;
-	private String c_comment;
-	private Date c_date;	
-	private int board_num;
-	private String user_nick;
-	private int user_num;
 
-	
-	
+	private int c_num;
+	private int board_num;
+	private int user_num;
+	private String c_replyer;
+	private String c_comment;
+	private String c_user_nick;
+	private Date c_date; // regdate
+
 	public CommentDTO() {
 		super();
 	}
 
-
-	public CommentDTO(int c_num, String c_comment, Date c_date, int board_num, String user_nick, int user_num) {
+	public CommentDTO(int c_num, int board_num, int user_num, String c_replyer, String c_comment, String c_user_nick,
+			Date c_date) {
 		super();
 		this.c_num = c_num;
-		this.c_comment = c_comment;
-		this.c_date = c_date;
 		this.board_num = board_num;
-		this.user_nick = user_nick;
 		this.user_num = user_num;
-	}
-
-	public String getUser_nick() {
-		return user_nick;
-	}
-
-	public void setUser_nick(String user_nick) {
-		this.user_nick = user_nick;
+		this.c_replyer = c_replyer;
+		this.c_comment = c_comment;
+		this.c_user_nick = c_user_nick;
+		this.c_date = c_date;
 	}
 
 	public int getC_num() {
@@ -44,12 +36,28 @@ public class CommentDTO {
 		this.c_num = c_num;
 	}
 
+	public int getBoard_num() {
+		return board_num;
+	}
+
+	public void setBoard_num(int board_num) {
+		this.board_num = board_num;
+	}
+
 	public String getC_comment() {
 		return c_comment;
 	}
 
 	public void setC_comment(String c_comment) {
 		this.c_comment = c_comment;
+	}
+
+	public String getC_user_nick() {
+		return c_user_nick;
+	}
+
+	public void setC_user_nick(String c_user_nick) {
+		this.c_user_nick = c_user_nick;
 	}
 
 	public Date getC_date() {
@@ -60,14 +68,6 @@ public class CommentDTO {
 		this.c_date = c_date;
 	}
 
-	public int getBoard_num() {
-		return board_num;
-	}
-
-	public void setBoard_num(int board_num) {
-		this.board_num = board_num;
-	}
-
 	public int getUser_num() {
 		return user_num;
 	}
@@ -76,14 +76,22 @@ public class CommentDTO {
 		this.user_num = user_num;
 	}
 
+	public String getC_replyer() {
+		return c_replyer;
+	}
 
+	public void setC_replyer(String c_replyer) {
+		this.c_replyer = c_replyer;
+	}
 
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("CommentDTO [c_num=").append(c_num).append(", c_comment=").append(c_comment).append(", c_date=")
-				.append(c_date).append(", board_num=").append(board_num).append(", user_nick=").append(user_nick)
-				.append(", user_num=").append(user_num).append("]");
+		builder.append("CommentDTO [c_num=").append(c_num).append(", board_num=").append(board_num)
+				.append(", user_num=").append(user_num).append(", c_replyer=").append(c_replyer).append(", c_comment=")
+				.append(c_comment).append(", c_user_nick=").append(c_user_nick).append(", c_date=")
+				.append(c_date)
+				.append("]");
 		return builder.toString();
 	}
 

@@ -25,26 +25,28 @@
 	</select>
 
 
-	<select id="listAll" resultType="userboarddto"
-		parameterType="string">
+	<select id="listAll" resultType="userboarddto" parameterType="string">
 		select mu.user_num, mu.user_nick, mb.title,
-		mb.board_num, mb.board_date, mb.recommend, mb.m_content, mb.m_image
-		from mat_board mb, mat_user mu
+		mb.board_num,
+		mb.board_date, mb.recommend, mb.m_content, mb.m_image
+		from mat_board
+		mb, mat_user mu
 		where mu.user_num = mb.user_num
 		and
 		mb.board_group=#{board_group}
 		order by board_num desc
 	</select>
-	
-	
 
-	<select id="selectAllComment" resultType ="commentdto" parameterType="map">
-		select mc.c_num, mc.c_comment, mc.c_date, mb.board_num, mu.user_nick, mu.user_num
-		from mat_comment mc, mat_user mu, mat_board mb
-		where mc.board_num = mb.board_num and mu.user_num=#{user_num}
-		order by c_date asc
+	<!-- 댓글 목록 -->
+	<select id="commentlist" resultType="commentdto" parameterType="int">
+		SELECT mc.c_num, mc.board_num,
+		mc.c_comment, mc.c_replyer, mc.regdate c_date
+		FROM mat_comment mc
+		WHERE board_num=#{board_num}
+		ORDER BY
+		mc.c_num
+		asc
 	</select>
-
 
 
 </mapper>

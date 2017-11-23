@@ -2,12 +2,15 @@ package com.matdatour.comment;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 public interface CommentService {
-	public List<CommentDTO> selectAllComment(int board_num);
+	public List<CommentDTO> selectAllComment(Integer board_num);
 
-	public int serv_commentInsert(CommentDTO commentdto);
+	public void commentInsert(CommentDTO commentdto);
 
-	public int serv_commentUpdate(CommentDTO commentdto);
+	public void commentUpdate(CommentDTO commentdto);
 
-	public int serv_commentDelete(int user_num);
+	public void commentDelete(int c_num);
+ 
 }

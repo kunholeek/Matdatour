@@ -28,7 +28,7 @@ public class JoinController {
 		List<UserBoardDTO> list = userboardService.listAll(board_group);
 		model.addAttribute("board_list",list);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("board_list");;
+		mav.setViewName("board_list");
 		
 		return "board_list";
 	}

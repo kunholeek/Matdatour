@@ -33,8 +33,8 @@
 		board_date, title,
 		recommend,m_content,m_image,
 		user_num)
-		values(board_seq.nextval,#{board_group},TO_CHAR(TO_DATE(SYSDATE,
-		'YYYY-MM-DD HH24:MI:SS')),#{title},0,#{m_content},
+		values(board_seq.nextval,#{board_group},SYSDATE
+		,#{title},0,#{m_content},
 		#{m_image},#{user_num})
 	</insert>
 	<!-- , jdbcType=VARCHAR -->
@@ -42,9 +42,11 @@
 	<update id="boardUpdate" parameterType="boarddto">
 		update mat_board set
 		board_group=#{board_group}, board_date=sysdate,
-		title=#{title}, m_content=#{m_content}, m_image=#{m_image}
+		title=#{title},
+		m_content=#{m_content}, m_image=#{m_image}
 		where
-		board_num = #{board_num}
+		board_num =
+		#{board_num}
 	</update>
 
 	<delete id="boardDelete" parameterType="int">

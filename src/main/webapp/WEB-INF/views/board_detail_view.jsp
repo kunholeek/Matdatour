@@ -17,94 +17,97 @@
 div.boarddetailstyle {
 	width: 500px;
 	margin: auto;
+} 
+div.form-group {
+	width: 500px;
+	margin: auto;
+}
+
+#comments {
+	width: 500px;
+	margin: auto;
 }
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<title>게시글 작성</title>
+
+<title>게시글</title>
 <script>
-	$(document).ready(function() {
-		listReply();
-		// listReply2();
+	$(document).ready(
+			function() {
 
-		$("#btnReply").click(function() {
-			var c_comment = $("#c_comment").val();
-			var board_num = "${dto.board_num}"
-			var param = "c_comment=" + c_comment + "&board_num=" + board_num;
-			$.ajax({
-				type : "post",
-				url : "insert.do",
-				data : param,
-				success : function() {
-					alert("댓글이 등록되었습니다.");
-					listReply();
-				}
+				listReply(); // **댓글 목록 불러오기
+				//listReply2(); // ** json 리턴방식
+
+				// ** 댓글 쓰기 버튼 클릭 이벤트 (ajax로 처리)
+				$("#btnReply").click(
+						function() {
+							var board_num = $("#board_num").val();
+							var user_num = $("#user_num").val();
+							var c_comment = $("#c_comment").val();
+							var user_nick = $("#user_nick").val();
+							var param = "board_num=" + board_num + "&user_num="
+									+ user_num + "&c_comment=" + c_comment
+									+ "&user_nick=" + user_nick;
+
+							if (c_comment == "") {
+								alert("내용을 입력하세요");
+								document.form - group.c_comment.focus();
+								return;
+							}
+							$.ajax({
+								type : "post",
+								url : "../reply/insert.do",
+								data : param,
+								success : function() {
+									alert("댓글이 등록되었습니다.");
+									listReply();
+								}
+							});
+						});
+
+				/* ********************************************* */
+				$("#btnDelete").click(function() {
+					if (confirm("삭제하시겠습니까?")) {
+						document.writing.action = "delete.do";
+						document.writing.submit();
+					}
+				});
+
+				$("#btnUpdate").click(function() {
+					//var title = document.form1.title.value; ==> name속성으로 처리할 경우
+					//var content = document.form1.content.value;
+					//var writer = document.form1.writer.value;
+					var title = $("#title").val();
+					var m_content = $("#m_content").val();
+					var user_nick = $("#user_nick").val();
+
+					document.writing.action = "update.do"
+					// 폼에 입력한 데이터를 서버로 전송
+					document.writing.submit();
+				});
+
+				$("#btnList").click(function() {
+					location.href = "list.do?board_group=${dto.board_group}";
+				});
+
 			});
-		});
-
-		/* ********************************************* */
-		$("#btnDelete").click(function() {
-			if (confirm("삭제하시겠습니까?")) {
-				document.writing.action = "delete.do";
-				document.writing.submit();
-			}
-		});
-
-		$("#btnUpdate").click(function() {
-			//var title = document.form1.title.value; ==> name속성으로 처리할 경우
-			//var content = document.form1.content.value;
-			//var writer = document.form1.writer.value;
-			var title = $("#title").val();
-			var m_content = $("#m_content").val();
-			var user_nick = $("#user_nick").val();
-
-			document.writing.action = "update.do"
-			// 폼에 입력한 데이터를 서버로 전송
-			document.writing.submit();
-		});
-
-		$("#btnList").click(function() {
-			location.href = "list.do?board_group=${dto.board_group}";
-		});
-
-	});
 
 	// Controller방식
 	// **댓글 목록1
 	function listReply() {
 		$.ajax({
 			type : "get",
-			url : "list.do?board_num=${dto.board_num}",
+			url : "view.do?board_num=${dto.board_num}",
 			success : function(result) {
 				// responseText가 result에 저장됨.
-				$("#listReply").html(result);
-			}
-		});
-	}
-	// RestController방식 (Json)
-	// **댓글 목록2 (json)
-	function listReply2() {
-		$.ajax({
-			type : "get",
-			//contentType: "application/json", ==> 생략가능(RestController이기때문에 가능)
-			url : "listJson.do?board_num=${dto.board_num}",
-			success : function(result) {
-				console.log(result);
-				var output = "<table>";
-				for ( var i in result) {
-					output += "<tr>";
-					output += "<td>" + result[i].userName;
-					output += "(" + changeDate(result[i].regdate) + ")<br>";
-					output += result[i].replytext + "</td>";
-					output += "<tr>";
-				}
-				output += "</table>";
-				$("#listReply").html(output);
+				$("#replyList").html(result);
 			}
 		});
 	}
 </script>
+
 
 
 </head>
@@ -131,9 +134,9 @@ div.boarddetailstyle {
 				<%-- 				<img src="upload/${dto.m_image}" />
  --%>
 				<%-- <IMG src='../upload/${dto.m_image }'><br> --%>
-			<%-- 	<a href="${dto.m_image }">${dto.m_image }</a><br /> <img alt="그림"
+				<%-- 	<a href="${dto.m_image }">${dto.m_image }</a><br /> <img alt="그림"
 					src="${dto.m_image }"> --%>
-                <img src="${pageContext.request.contextPath}/upload/${dto.m_image }">
+				<img src="${pageContext.request.contextPath}/upload/${dto.m_image }">
 			</div>
 
 			<div>내용 :</div>
@@ -144,7 +147,7 @@ div.boarddetailstyle {
 
 				</div>
 			</div>
-			<div>닉네임 : ${nick}</div>
+			<div>닉네임 : ${user_nick}</div>
 			<div style="width: 650px; text-align: center;">
 
 
@@ -163,27 +166,49 @@ div.boarddetailstyle {
 
 
 			</div>
-
-
 		</form>
 	</div>
-	<!-- *******************************댓글*********************  -->
-	<div style="width: 650px; text-align: center;">
-		<br>
+	<br>
+	<br>
+
+
+
+	<div class="form-group">
+		<input type="hidden" id="board_num" value="${dto.board_num }">
+		<input type="hidden" id="user_num" value="${sessionScope.user_num }">
+		<input type="hidden" id="user_nick" value="${sessionScope.user_nick}">
+
 		<!-- **로그인 한 회원에게만 댓글 작성폼이 보이게 처리 -->
 		<c:if test="${sessionScope.user_id != null}">
-			<textarea rows="5" cols="80" id="c_comment" placeholder="댓글을 작성해주세요"></textarea>
+			<br>
+			<textarea class="form-control" rows="2" id="c_comment"
+				placeholder="댓글을 작성해주세요"></textarea>
 			<br>
 			<button type="button" id="btnReply">댓글 작성</button>
-		</c:if>
+
+			<br>
+			<br>
 	</div>
 
+	<table class="table table-striped table-hover table-bordered"
+		id="comments">
+		<thead class="thead-dark">
+			<tr>
+				<th>NickName</th>
+				<th>comment</th>
+			</tr>
+		</thead>
 
-	<!-- **댓글 목록 출력할 위치 -->
-	<!-- <div id="listReply"></div> -->
-
-
-
-
+		<hr>
+		<tbody>
+			<c:forEach var="row" items="${commentlist}">
+				<tr>
+					<td>${row.c_replyer}</td>
+					<td>${row.c_comment}</td>
+				</tr>
+			</c:forEach>
+			</c:if>
+		</tbody>
+	</table>
 </body>
 </html>

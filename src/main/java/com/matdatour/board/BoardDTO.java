@@ -2,8 +2,6 @@ package com.matdatour.board;
 
 import java.sql.Date;
 
-import org.springframework.web.multipart.MultipartFile;
-
 public class BoardDTO {
 
 	private int board_num;

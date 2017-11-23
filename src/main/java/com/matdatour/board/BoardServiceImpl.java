@@ -76,7 +76,7 @@ public class BoardServiceImpl implements BoardService {
 		String isSuccess = null;
 
 		String uploadPath = mRequest.getRealPath("/upload/");
-		// �뾽濡쒕뱶�븳 �뙆�씪�쓣 �떞�븘�몮 怨�
+		 
 
 		File dir = new File(uploadPath);
 
@@ -94,11 +94,9 @@ public class BoardServiceImpl implements BoardService {
 
 			//폴더
 			
-			if (saveFileName != null && !saveFileName.equals("")) {
+			if (saveFileName != null && !saveFileName.equals ("")) {
 				if (new File(uploadPath + saveFileName).exists()) {
-					saveFileName = System.currentTimeMillis()+"_"+saveFileName ;
-					// 留뚯빟 �씠誘� �뾽濡쒕뱶 �븳�뙆�씪怨� �씪移섑븯�떎硫� 湲곗〈 �뙆�씠 �씠由꾩뿉
-					// System.currentTimeMillis(); 異붽��븯�뿬 援щ텇
+					saveFileName = System.currentTimeMillis()+"_"+saveFileName ; 
 				}
 
 				try {

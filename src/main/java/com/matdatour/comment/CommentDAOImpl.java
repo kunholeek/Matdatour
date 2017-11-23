@@ -1,7 +1,8 @@
 package com.matdatour.comment;
 
-import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,16 +10,17 @@ import org.springframework.stereotype.Repository;
 
 @Repository("commentdao")
 
-public class CommentDAOImpl implements CommentDAO{
+public class CommentDAOImpl implements CommentDAO {
 
 	@Autowired
 	SqlSession sqlSession;
 
 	String namespace = "com.matdatour.comment.";
+ 
 	
 	@Override
-	public List<CommentDTO> selectAllComment(int board_num) { 
-		return sqlSession.selectList("com.matdatour.user_board_join.selectAllComment",board_num);
+	public List<CommentDTO> selectAllComment(Integer board_num) {
+		return sqlSession.selectList("com.matdatour.user_board_join.commentlist",board_num);
 	}
 
 	@Override
@@ -35,5 +37,6 @@ public class CommentDAOImpl implements CommentDAO{
 	public int commentDelete(int user_num) {
 		return sqlSession.delete(namespace + "commentDelete", user_num);
 	}
+ 
 
 }
