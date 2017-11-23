@@ -1,20 +1,11 @@
 package com.matdatour.app;
 
-<<<<<<< HEAD
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
-=======
-import java.io.File;
-import java.io.IOException;
-import java.net.URLEncoder;
-import java.sql.Date;
-
-import javax.servlet.http.HttpServletRequest;
->>>>>>> wook1
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
