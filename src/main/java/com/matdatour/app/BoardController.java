@@ -3,9 +3,12 @@ package com.matdatour.app;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -87,7 +90,10 @@ public class BoardController {
 	}
 
 	@RequestMapping("/board/boardUpdate.do")
-	public String boardUpdate() {
+	public String boardUpdate( String m_content, Model model) {
+		m_content = m_content.replaceAll("<br>", "");
+		System.out.println(m_content); 
+		model.addAttribute("m_content", m_content);
 		return "board_update";
 	}
 
@@ -103,6 +109,7 @@ public class BoardController {
 		String board_group = mRequest.getParameter("board_group");
 		String title = mRequest.getParameter("title");
 		String m_content = mRequest.getParameter("m_content");
+		m_content = m_content.replaceAll("<br>", "");
 		int user_num = Integer.parseInt(mRequest.getParameter("user_num"));
 		String m_image = mRequest.getParameter("m_image");
 		file = boardService.fileUpload(mRequest);

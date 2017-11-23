@@ -83,8 +83,9 @@ div.form-group {
 
 					/* $("#f").serialize() ->?board_num=100&board_group=한식 */
 
-					var str = $("#writing").serialize();
-					document.writing.action = "boardUpdate.do?" + str
+					//var str = $("#writing").serialize();
+					//alert(str);
+					document.writing.action = "boardUpdate.do"
 					// 폼에 입력한 데이터를 서버로 전송
 					document.writing.submit();
 				});
@@ -162,9 +163,9 @@ div.form-group {
 		<!-- 게시물 hidden으로 처리 -->
 		<input type="hidden" name="board_num" value="${dto.board_num}">
 		<input type="hidden" name="board_group" value="${dto.board_group}">
-		<input type="hidden" name="title" value="${dto.title}"> <input
-			type="hidden" name="m_content" value="${dto.m_content}"> <input
-			type="hidden" name="m_image" value="${dto.m_image }">
+		<input type="hidden" name="title" value="${dto.title}"> 
+		<input type="hidden" name="m_content" value="${dto.m_content}"> 
+		<input	type="hidden" name="m_image" value="${dto.m_image }">
 
 		<c:if test="${dto.user_num == sessionScope.user_num}">
 			<button type="button" class="btn btn-outline-success" id="btnUpdate">수정</button>

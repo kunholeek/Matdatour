@@ -41,7 +41,7 @@ div.boardwritestyle {
 					<textarea class="form-control" name="m_content" id="m_content"
 						rows="3"
 						style="margin-top: 0px; margin-bottom: 0px; height: 176px;"
-						><%=request.getParameter("m_content")%></textarea>
+						>${m_content}</textarea>
 				</div>
  
  

@@ -46,7 +46,8 @@ public class BoardServiceImpl implements BoardService {
 		
 		content = content.replaceAll("<", "&lt;");
 		content = content.replaceAll(">", "&gt;");
-		content = content.replaceAll("\n", "<br>");
+	content = content.replaceAll("\n", "<br>");
+		System.out.println(content);
 		boarddto.setTitle(title);
 		boarddto.setM_content(content);
 
@@ -66,6 +67,7 @@ public class BoardServiceImpl implements BoardService {
 		content = content.replaceAll("<", "&lt;");
 		content = content.replaceAll(">", "&gt;");
 		content = content.replaceAll("\n", "<br>");
+		System.out.println(content);
 		boarddto.setTitle(title);
 		boarddto.setM_content(content);
 		
