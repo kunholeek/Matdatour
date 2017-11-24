@@ -5,8 +5,12 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -60,7 +64,24 @@ public class CommentController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("replyList");
 		return "redirect:board/view.do?board_num=" + board_num;
-		
+
+	}
+
+	@RequestMapping(value = "/reply/update/{c_num}", method = { RequestMethod.PUT, RequestMethod.PATCH })
+	public ResponseEntity<String> replyUpdate(@PathVariable("c_num") Integer c_num,
+			@RequestBody CommentDTO commentdto) {
+		ResponseEntity<String> entity = null;
+		try {
+			commentdto.setC_num(c_num);
+			commentService.commentUpdate(commentdto);
+			entity = new ResponseEntity<String>("success", HttpStatus.OK);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+
 	}
 
 }

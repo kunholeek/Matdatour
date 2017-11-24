@@ -16,18 +16,29 @@
 }
  */
 div.boarddetailstyle {
-	width: 500px;
-	margin: auto;
+	/* width: 500px; */
+	margin: 50px;
 }
 
 div.form-group {
-	width: 500px;
-	margin: auto;
+	/* width: 500px; */
+	margin: 50px;
 }
 
 #comments {
-	width: 500px;
+	width: 40%;
 	margin: auto;
+	float: right;
+}
+
+#leftcontent {
+	width: 40%;
+	float: left;
+}
+
+#tbody1 {
+	height: 200px;
+	overflow: auto;
 }
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -65,6 +76,8 @@ div.form-group {
 								success : function() {
 									alert("댓글이 등록되었습니다.");
 									listReply();
+									history.go(0);
+									1
 								}
 							});
 						});
@@ -108,12 +121,11 @@ div.form-group {
 			}
 		});
 	}
+
 	/********************************************************************************************************/
 </script>
-
-
-
 </head>
+
 <body>
 	<!--style="background-color:#78c2ad2e;"  -->
 	<%@ include file="menu.jsp"%>
@@ -123,102 +135,122 @@ div.form-group {
 		<button type="button"
 			class="btn btn-outline-secondary btn-lg btn-block">BOARD
 			DETAIL</button>
-		<form name="writing" method="post" id="writing">
+		<table id="leftcontent">
+			<tr>
+				<td>
+					<form name="writing" method="post" id="writing">
+						<div>
+							<!-- 원하는 날짜형식으로 출력하기 위해 fmt태그 사용 -->
+							DATE :
+							<fmt:formatDate value="${dto.board_date}" pattern="yyyy-MM-dd" />
+							<!-- 날짜 형식 => yyyy 4자리연도, MM 월, dd 일, a 오전/오후, HH 24시간제, hh 12시간제, mm 분, ss 초 -->
+						</div>
 
-			<div>
-				<!-- 원하는 날짜형식으로 출력하기 위해 fmt태그 사용 -->
-				DATE :
-				<fmt:formatDate value="${dto.board_date}"
-					pattern="yyyy-MM-dd a HH:mm:ss" />
-				<!-- 날짜 형식 => yyyy 4자리연도, MM 월, dd 일, a 오전/오후, HH 24시간제, hh 12시간제, mm 분, ss 초 -->
-			</div>
+						<!-- 글 제목 div  -->
+						<div>TITLE : ${dto.title}</div>
+						<br>
+						<!-- 콘텐츠 div -->
+						<div>
 
-			<!-- 글 제목  -->
-			<div>TITLE : ${dto.title}</div>
-			<br>
-			<div>
+							<center>
+								<img
+									src="${pageContext.request.contextPath}/upload/${dto.m_image }"
+									class="rounded" width="70%" height="70%">
+							</center>
+							<div>
+								NICKNAME : <b>${nick}</b>
+							</div>
+							<br> ${dto.m_content}<br>
+						</div>
+						<br> <br>
 
-			<center>
-				<img src="${pageContext.request.contextPath}/upload/${dto.m_image }"
-					class="rounded" width="90%" height="90%">
-			</center>
-	</div>
-	<br>
-	<!-- 글내용  -->
-	<div>CONTENT :</div>
-	<br>
-	<div class="card border-dark">
-		<div class="card-body" id="contentbody">
-			<blockquote class="card-blockquote">${dto.m_content}</blockquote>
+
+						<%-- 	<!-- 글내용  -->
+						<div>CONTENT :</div>
+						<br>
+						<div class="card border-dark">
+							<div class="card-body" id="contentbody">
+								<blockquote class="card-blockquote">${dto.m_content}</blockquote>
+							</div>
+						</div>
+ --%>
+
+
+						<div style="width: 650px; text-align: center;">
+
+							<!-- 게시물 hidden으로 처리 -->
+							<input type="hidden" name="board_num" value="${dto.board_num}">
+							<input type="hidden" name="board_group"
+								value="${dto.board_group}"> <input type="hidden"
+								name="title" value="${dto.title}"> <input type="hidden"
+								name="m_content" value="${dto.m_content}"> <input
+								type="hidden" name="m_image" value="${dto.m_image }">
+
+							<c:if test="${dto.user_num == sessionScope.user_num}">
+								<button type="button" class="btn btn-outline-success"
+									id="btnUpdate">수정</button>
+								<button type="button" class="btn btn-outline-secondary"
+									id="btnDelete">삭제</button>
+							</c:if>
+							<button type="button" id="btnList" class="btn btn-outline-danger">목록</button>
+						</div>
+					</form>
+				</td>
+			</tr>
+		</table>
+		<!-- ********************* 댓글 리스트**************************************  -->
+		<br> <br>
+		<div>
+			<table class="table table-striped table-hover table-bordered"
+				id="comments">
+				<hr>
+				<thead class="thead-dark" id="th1">
+					<tr>
+						<th>NickName</th>
+						<th>comment</th>
+					</tr>
+				</thead>
+				<!-- 리플 리스트  -->
+				<tbody id="tbody1">
+
+					<c:forEach var="row" items="${commentlist}">
+						<tr>
+							<td>${row.c_replyer}</td>
+							<td>${row.c_comment}</td>
+						</tr>
+					</c:forEach>
+
+				</tbody>
+				<!-- 리플 리스트  -->
+
+				<!-- 리플 등록  -->
+				<tbody>
+					<tr>
+						<td colspan="2">
+							<!-- **로그인 한 회원에게만 댓글 작성폼이 보이게 처리 --> <c:if
+								test="${sessionScope.user_id != null}">
+								<br>
+								<textarea class="form-control" id="c_comment"
+									placeholder="댓글을 작성해주세요"></textarea>
+								<br>
+								<button type="button" class="btn btn-primary btn-lg btn-block"
+									id="btnReply">COMMENT</button>
+							</c:if>
+						</td>
+					</tr>
+				</tbody>
+				<!-- 리플 등록  -->
+			</table>
 		</div>
+
 	</div>
 
-
-	<div>NICKNAME : ${nick}</div>
-
-	<div style="width: 650px; text-align: center;">
-
-
-
-		<!-- 게시물 hidden으로 처리 -->
-		<input type="hidden" name="board_num" value="${dto.board_num}">
-		<input type="hidden" name="board_group" value="${dto.board_group}">
-		<input type="hidden" name="title" value="${dto.title}"> 
-		<input type="hidden" name="m_content" value="${dto.m_content}"> 
-		<input	type="hidden" name="m_image" value="${dto.m_image }">
-
-		<c:if test="${dto.user_num == sessionScope.user_num}">
-			<button type="button" class="btn btn-outline-success" id="btnUpdate">수정</button>
-			<button type="button" class="btn btn-outline-secondary"
-				id="btnDelete">삭제</button>
-		</c:if>
-		<button type="button" id="btnList" class="btn btn-outline-danger">목록</button>
-	</div>
-	</form>
-	</div>
-
-	<br>
-	<br>
-
-
-
+	<!-- ********************* 댓글 등록**************************************  -->
 	<div class="form-group">
 		<input type="hidden" id="board_num" value="${dto.board_num }">
 		<input type="hidden" id="user_num" value="${sessionScope.user_num }">
 		<input type="hidden" id="user_nick" value="${sessionScope.user_nick}">
 
-		<!-- **로그인 한 회원에게만 댓글 작성폼이 보이게 처리 -->
-		<c:if test="${sessionScope.user_id != null}">
-			<br>
-			<textarea class="form-control" rows="2" id="c_comment"
-				placeholder="댓글을 작성해주세요"></textarea>
-			<br>
-			<button type="button" id="btnReply">댓글 작성</button>
-
-			<br>
-			<br>
-	</div>
-
-
-	<table class="table table-striped table-hover table-bordered"
-		id="comments">
-		<thead class="thead-dark">
-			<tr>
-				<th>NickName</th>
-				<th>comment</th>
-			</tr>
-		</thead>
-
-		<hr>
-		<tbody>
-			<c:forEach var="row" items="${commentlist}">
-				<tr>
-					<td>${row.c_replyer}</td>
-					<td>${row.c_comment}</td>
-				</tr>
-			</c:forEach>
-			</c:if>
-		</tbody>
-	</table>
+	</div> 
 </body>
 </html>

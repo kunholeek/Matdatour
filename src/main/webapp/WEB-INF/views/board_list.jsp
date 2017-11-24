@@ -6,8 +6,17 @@
 <head>
 <style>
 div.boardliststyle {
-	width: 1000px;
+	width: 1024px;
 	margin: auto;
+}
+
+.horizonAlign {
+	width: 100%;
+}
+
+.horizonAlign div {
+	display: inline-block;
+	margin: 5px;
 }
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -25,41 +34,42 @@ div.boardliststyle {
 </head>
 <body>
 	<%@ include file="menu.jsp"%>
-	<br><br>
+	<br>
+	<br>
+	<br>
+	<br>
 	<div class="boardliststyle">
 		<center>
 			<button type="button" class="btn btn-secondary">BOARD LIST</button>
- 
-			<form action="list.do" method="get">
-				<table class="table table-striped table-hover table-bordered ">
-					<tr class="table-secondary">
-						<th>제목</th>
-						<th>닉네임</th>
-						<th>작성일</th>
-						<!-- <th>평점</th> -->
-					</tr>
-					<c:set var="num" value="0"></c:set>
-					<c:forEach var="row" items="${board_list}">
-						<tr>
-							<td><a
-								href="view.do?board_num=${row.board_num}&user_nick=${row.user_nick}">${row.title}</a></td>
-							<td>${row.user_nick}</td>
-							<td>
-								<!-- 원하는 날짜형식으로 출력하기 위해 fmt태그 사용 --> <fmt:formatDate
-									value="${row.board_date}" pattern="yyyy-MM-dd HH:mm:ss" />
-							</td>
-							<!--  평점 구축 예정 -->
-							<!-- <td></td> -->
-						</tr>
-						<c:set var="num" value="${ num+1}"></c:set>
-						<c:if test="${num%5==0}">
-							<br>
-						</c:if>
-					</c:forEach>
-				</table>
-			</form>
-			<button type="button" class="btn btn-outline-danger" id="btnWrite">글쓰기</button>
 		</center>
+		<div style="text-align: right;">
+			<button type="button" class="btn btn-outline-danger" id="btnWrite">글쓰기</button>
+		</div>
+		<hr>
+		<br>
+		<form action="list.do" method="get">
+			<div class="horizonAlign" width="25%" hieght="25%">
+				<c:set var="num" value="0"></c:set>
+				<c:forEach var="row" items="${board_list}">
+					<div>
+						<a
+							href="view.do?board_num=${row.board_num}&user_nick=${row.user_nick}">
+							<img width="320px" height="240px"
+							src="${pageContext.request.contextPath}/upload/${row.m_image}"
+							class="rounded" width="70%" height="70%">
+						</a><br> <b>${row.user_nick} </b><a
+							href="view.do?board_num=${row.board_num}&user_nick=${row.user_nick}">${row.title}</a><br>
+						<fmt:formatDate value="${row.board_date}" pattern="yyyy-MM-dd" />
+						<br>
+
+					</div>
+					<c:set var="num" value="${ num+1}"></c:set>
+					<c:if test="${num%5==0}">
+					</c:if>
+				</c:forEach>
+			</div>
+		</form>
+
 	</div>
 </body>
 </html>
