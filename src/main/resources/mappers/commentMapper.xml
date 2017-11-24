@@ -18,9 +18,10 @@
 	</insert>
 
 
-	<update id="commentUpdate" parameterType="commentdto">
+	<update id="commentUpdate">
 		update mat_comment set
 		c_comment=#{c_comment}
+		where c_num = #{c_num}
 	</update>
 
 

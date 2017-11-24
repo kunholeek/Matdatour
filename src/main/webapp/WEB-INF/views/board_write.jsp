@@ -10,6 +10,8 @@ div.boardwritestyle {
 	width: 1000px;
 	margin: auto;
 }
+
+
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script
