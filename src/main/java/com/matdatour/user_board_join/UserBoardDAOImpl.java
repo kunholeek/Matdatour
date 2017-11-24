@@ -20,4 +20,10 @@ public class UserBoardDAOImpl implements UserBoardDAO{
 		return sqlSession.selectList(namespace+"listAll", board_group);
 	}
 
+	@Override
+	public List<UserBoardDTO> slistAll(String mtitle) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+"slistAll", mtitle);
+	}
+
 }

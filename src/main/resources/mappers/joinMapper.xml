@@ -36,6 +36,16 @@
 		mb.board_group=#{board_group}
 		order by board_num desc
 	</select>
+	<select id="slistAll" resultType="userboarddto" parameterType="string">
+		select mu.user_num, mu.user_nick, mb.title,
+		mb.board_num,
+		mb.board_date, mb.recommend, mb.m_content, mb.m_image
+		from mat_board
+		mb, mat_user mu
+		where 
+		mb.title like '%#{mtitle}%'
+		order by board_num desc
+	</select>
 
 	<!-- 댓글 목록 -->
 	<select id="commentlist" resultType="commentdto" parameterType="int">

@@ -36,6 +36,12 @@
 			location.href = "../user/login.do";
 		});
 	});
+	$(document).ready(function() {
+		$("#mypage").click(function() {
+			// 페이지 주소 변경(이동)
+			location.href = "../user/updateready.do?user_id=${sessionScope.user_id}";
+		});
+	});
 </script>
 
 
@@ -103,12 +109,14 @@
 
 	<span> <c:choose>
 			<c:when test="${sessionScope.user_id == null}">
+				
 				<button type="button" class="btn btn-secondary" id="menuLogin">Login</button>
 			</c:when>
 
 			<c:otherwise>
 
 				<font color="white"> ${sessionScope.user_nick}님이 로그인중입니다.</font>
+				<button type="button" class="btn btn-secondary" id="mypage">Mypage</button>
 				<button type="button" class="btn btn-secondary" id="btnLogout">Logout</button>
 
 			</c:otherwise>

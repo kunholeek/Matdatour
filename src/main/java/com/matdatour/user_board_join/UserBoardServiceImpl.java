@@ -16,4 +16,9 @@ public class UserBoardServiceImpl implements UserBoardService {
 		return userboarddao.listAll(board_group);
 	}
 
+	@Override
+	public List<UserBoardDTO> slistAll(String mtitle) {
+		return userboarddao.slistAll(mtitle);
+	}
+
 }

@@ -33,5 +33,15 @@ public class JoinController {
 		
 		return "board_list";
 	}
+	@RequestMapping(value="search.do",method=RequestMethod.GET)
+	public String slist(String mtitle, Model model){
+		System.out.println("검색어>>>>"+mtitle);
+		List<UserBoardDTO> slist = userboardService.slistAll(mtitle);
+		model.addAttribute("board_slist",slist);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("board_list");
+		
+		return "board_list";
+	}
  
 }

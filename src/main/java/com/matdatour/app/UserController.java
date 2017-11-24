@@ -29,8 +29,9 @@ public class UserController {
 	public String login() {
 		return "login";
 	}
+
 	@RequestMapping("/home.do")
-	public ModelAndView home(){
+	public ModelAndView home() {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("msg", "success");
 		mav.setViewName("home");
@@ -54,7 +55,6 @@ public class UserController {
 		return mav;
 	}
 
-	
 	// 3.로그아웃 처리
 	@RequestMapping("/logout.do")
 	public ModelAndView logout(HttpSession session) {
@@ -86,4 +86,18 @@ public class UserController {
 		return "redirect:login.do";
 	}
 
+	// 7. 회원 등록 페이지로 이동
+	@RequestMapping("/updateready.do")
+	public String mypageWrite(String user_id, Model model) {
+		model.addAttribute("user", userService.selectByID(user_id));
+		return "mypage";
+	}
+
+	// 회원 수정 처리후 목록으로 redirect
+	@RequestMapping("/update.do")
+	public String memberUpdate(@ModelAttribute UserDTO userdto) {
+		userService.serv_userUpdate(userdto);
+		return "redirect:home.do";
+
+	}
 }

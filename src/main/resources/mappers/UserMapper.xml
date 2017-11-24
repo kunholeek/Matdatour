@@ -12,13 +12,11 @@
 		user_nick,
 		user_phone
 		FROM mat_user
-		WHERE user_id = #{user_id} AND user_pwd =
+		WHERE user_id
+		= #{user_id} AND user_pwd =
 		#{user_pwd}
-		
-		<!-- SELECT
-		user_nick
-		WHERE user_id = #{user_id} AND user_pwd =
-		#{user_pwd} -->
+
+		<!-- SELECT user_nick WHERE user_id = #{user_id} AND user_pwd = #{user_pwd} -->
 	</select>
 
 	<select id="viewUser" resultType="userdto">
@@ -28,7 +26,8 @@
 		user_nick,
 		user_phone
 		FROM mat_user
-		WHERE user_id = #{user_id} AND user_pwd =
+		WHERE user_id = #{user_id} AND
+		user_pwd =
 		#{user_pwd}
 	</select>
 
@@ -55,7 +54,7 @@
 		user_pwd, user_nick, user_phone
 		from mat_user
 		where
-		user_id=#{aa}
+		user_id=#{user_id}
 	</select>
 	<select id="selectByUserNum" resultType="userdto" parameterType="int">
 		select user_id,
@@ -69,6 +68,7 @@
 	<update id="userUpdate" parameterType="userdto">
 		update mat_user set
 		user_pwd=#{user_pwd}, user_nick=#{user_nick}, user_phone=#{user_phone}
+		where user_id=#{user_id}
 	</update>
 
 	<delete id="userDelete" parameterType="int">
