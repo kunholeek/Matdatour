@@ -27,11 +27,23 @@ public class JoinController {
 	public String list(String board_group, Model model) throws Exception {
 		System.out.println("list >> "+ board_group);
 		List<UserBoardDTO> list = userboardService.listAll(board_group);
+		model.addAttribute("board_group", board_group);
 		model.addAttribute("board_list",list);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("board_list");
 		
 		return "board_list";
+	}
+	@RequestMapping(value="rlist.do", method=RequestMethod.GET)
+	public String rlist(String board_group, Model model) throws Exception {
+		System.out.println("list >> "+ board_group);
+		List<UserBoardDTO> list = userboardService.listAll(board_group);
+		model.addAttribute("board_group", board_group);
+		model.addAttribute("board_list",list);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("recipe_list");
+		
+		return "recipe_list";
 	}
 	@RequestMapping(value="search.do",method=RequestMethod.GET)
 	public String slist(String mtitle, Model model){

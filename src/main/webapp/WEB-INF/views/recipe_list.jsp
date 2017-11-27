@@ -18,6 +18,9 @@ div.boardliststyle {
 	display: inline-block;
 	margin: 5px;
 }
+thead {
+    text-align: center;
+  }
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script
@@ -47,27 +50,42 @@ div.boardliststyle {
 		</div>
 		<hr>
 		<br>
-		<form action="list.do" method="get">
-			<div class="horizonAlign" width="25%" hieght="25%">
+		<form action="rlist.do?board_group=recipe" method="get">
+		<table class="table table-striped table-hover table-bordered">
+  			<thead class="thead-dark">
+		<tr class="table-secondary">
+		<td>
+		제목
+		</td>
+		<td>
+		작성자
+		</td>
+		<td>
+		날짜
+		</td>
+		</tr>
+		</thead>
+		<tbody>
 				<c:set var="num" value="0"></c:set>
 				<c:forEach var="row" items="${board_list}">
-					<div>
-						<a
-							href="view.do?board_num=${row.board_num}&user_nick=${row.user_nick}">
-							<img width="320px" height="240px"
-							src="${pageContext.request.contextPath}/upload/${row.m_image}"
-							class="rounded" width="70%" height="70%">
-						</a><br> <b>${row.user_nick} </b><a
-							href="view.do?board_num=${row.board_num}&user_nick=${row.user_nick}">${row.title}</a><br>
+				<tr>
+				<td text-align="center">
+						 <a	href="view.do?board_num=${row.board_num}&user_nick=${row.user_nick}">${row.title}</a><br>
+				</td>
+				<td width="100px">
+						 <b>${row.user_nick} </b>
+				</td>
+				<td  width="200px">
 						<fmt:formatDate value="${row.board_date}" pattern="yyyy-MM-dd" />
-						<br>
+				</td>
+				</tr>
 
-					</div>
 					<c:set var="num" value="${ num+1}"></c:set>
 					<c:if test="${num%5==0}">
 					</c:if>
 				</c:forEach>
-			</div>
+		</tbody>
+		</table>
 		</form>
 
 	</div>

@@ -27,7 +27,7 @@
 
 	<select id="listAll" resultType="userboarddto" parameterType="string">
 		select mu.user_num, mu.user_nick, mb.title,
-		mb.board_num,
+		mb.board_num,mb.board_group,
 		mb.board_date, mb.recommend, mb.m_content, mb.m_image
 		from mat_board
 		mb, mat_user mu

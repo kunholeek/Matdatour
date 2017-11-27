@@ -63,11 +63,12 @@ div.boardwritestyle {
 				<div class="form-group3">
 					<label>말머리</label> <select name="board_group" id="board_group"
 						class="form-control">
-						<option value="한식">한식</option>
+						<option  selected value="<%=request.getParameter("board_group")%>"><%=request.getParameter("board_group")%></option>
+				<!-- 		<option value="한식">한식</option>
 						<option value="일식">일식</option>
 						<option value="중식">중식</option>
 						<option value="양식">양식</option>
-						<option value="기타">기타</option>
+						<option value="기타">기타</option> -->
 					</select>
 				</div>
 				<div class="form-group4">
