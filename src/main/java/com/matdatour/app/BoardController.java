@@ -35,7 +35,9 @@ public class BoardController {
 
 	// 1. 게시글 작성화면
 	@RequestMapping(value = "/board/write.do", method = RequestMethod.GET)
-	public String write() {
+	public String write( String board_group, Model model) {
+		System.out.println(board_group);
+		model.addAttribute("board_group", board_group);
 		return "board_write";
 	}
 
@@ -66,11 +68,16 @@ public class BoardController {
 		boarddto.setM_image(file);
 
 		boardService.serv_boardInsert(boarddto);
-		mav.setViewName("home");
 		String encodeResult = URLEncoder.encode(board_group, "UTF-8");
+		if(encodeResult.equals("recipe")){
+			
+			return "redirect:rlist.do?board_group=" + encodeResult;
+		}
+		else {
+			return "redirect:list.do?board_group=" + encodeResult;
+		}
 
 
-		return "redirect:list.do?board_group=" + encodeResult;
 	}
 
 
@@ -136,7 +143,13 @@ public class BoardController {
 	
 		String encodeResult = URLEncoder.encode(board_group, "UTF-8");
 
-		return "redirect:list.do?board_group=" + encodeResult;
+	if(encodeResult.equals("recipe")){
+			
+			return "redirect:rlist.do?board_group=" + encodeResult;
+		}
+		else {
+			return "redirect:list.do?board_group=" + encodeResult;
+		}
 	}
 
 	// 글삭제
@@ -148,7 +161,13 @@ public class BoardController {
 
 		String encodeResult = URLEncoder.encode(board_group, "UTF-8");
 
-		return "redirect:list.do?board_group=" + encodeResult;
+	if(encodeResult.equals("recipe")){
+			
+			return "redirect:rlist.do?board_group=" + encodeResult;
+		}
+		else {
+			return "redirect:list.do?board_group=" + encodeResult;
+		}
 	}
 
 }

@@ -94,7 +94,7 @@
 
 
 					<li class="nav-item"><a class="nav-link active"
-						href="../user/home.do">Recipe <span class="sr-only">(current)</span></a>
+						href="../board/rlist.do?board_group=recipe">Recipe <span class="sr-only">(current)</span></a>
 					</li>
 
 
