@@ -7,11 +7,7 @@
 <head>
 
 <title>Home</title>
-<%-- <%@ include file="include/header.jsp" %> --%> 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script> 
+<%-- <%@ include file="include/header.jsp" %> --%>
 <style>
 /* Make the image fully responsive */
 .carousel-inner img {
@@ -20,73 +16,253 @@
 }
 </style>
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
-$(document).ready(
-		function() {
-		$("#btnSearch").click(function(){
-		
+	$(document).ready(function() {
+		$("#btnSearch").click(function() {
+
 			alert($("#search"));
-	
-		
+
 		});
-		});
+	});
 </script>
-	
+
+<!-- Bootstrap core CSS -->
+<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom fonts for this template -->
+<link href="../vendor/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
+<link href="../vendor/simple-line-icons/css/simple-line-icons.css"
+	rel="stylesheet" type="text/css">
+<link
+	href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic"
+	rel="stylesheet" type="text/css">
+
+<!-- Custom styles for this template -->
+<link href="../css/landing-page.min.css" rel="stylesheet">
+
+
 </head>
 <body>
 	<%@ include file="menu.jsp"%>
-	<div id="demo" class="carousel slide" data-ride="carousel">
-  <ul class="carousel-indicators">
-    <li data-target="#demo" data-slide-to="0" class="active"></li>
-    <li data-target="#demo" data-slide-to="1"></li>
-    <li data-target="#demo" data-slide-to="2"></li>
-  </ul>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="../img/desert.jpg" alt="desert" width="1100" height="500">
-      <div class="carousel-caption">
-        <h3>Los Angeles</h3>
-        <p>We had such a great time in LA!</p>
-      </div>   
-    </div>
-    <div class="carousel-item">
-      <img src="../img/japanese.jpg" alt="japanese" width="1100" height="500">
-      <div class="carousel-caption">
-        <h3>Chicago</h3>
-        <p>Thank you, Chicago!</p>
-      </div>   
-    </div>
-    <div class="carousel-item">
-      <img src="../img/sushi.jpg" alt="sushi" width="1100" height="500">
-      <div class="carousel-caption">
-        <h3>New York</h3>
-        <p>We love the Big Apple!</p>
-      </div>   
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#demo" data-slide="prev">
-    <span class="carousel-control-prev-icon"></span>
-  </a>
-  <a class="carousel-control-next" href="#demo" data-slide="next">
-    <span class="carousel-control-next-icon"></span>
-  </a>
-</div>
-	<form id ="search" name ="search">
-	<br>
-		<p><input type="text" id="search">  <button type="button" id="btnSearch">검색</button></p>
-	<br>
-	</form>
 
-	
-	
-	
-	
-	
-	<c:if test="${msg == 'success'}">
-		<right><h2>${sessionScope.user_nick}(${sessionScope.user_id})님환영합니다.</h2></right>
-	</c:if>
-	<%-- <%=request.getSession().getAttribute("user_nick")%> --%>
+	<!-- Navigation -->
+	<nav class="navbar navbar-light bg-light static-top">
+		<div class="container">
+			<a class="navbar-brand" href="#">Start Bootstrap</a> <a
+				class="btn btn-primary" href="#">Sign In</a>
+		</div>
+	</nav>
+
+	<!-- Masthead -->
+	<header class="masthead text-white text-center">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-9 mx-auto">
+					<h1 class="mb-5">Welcome to Matdatour</h1>
+				</div>
+				<div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+					<!-- 검색기능 -->
+					<form method="post" action="../board/search.do">
+						<div class="form-row">
+							<div class="col-3 col-md-4 mb-2 mb-md-0">
+								<select class="form-control" name="searchOption">
+									<!-- 검색조건을 검색처리후 결과화면에 보여주기위해  c:out 출력태그 사용, 삼항연산자 -->
+									<%-- 		<option value="all"
+				<c:out value="${map.searchOption == 'all'?'selected':''}"/>>제목+이름+제목</option> --%>
+									<option value="title"
+										<c:out value="${map.searchOption == 'title'?'selected':''}"/>>TITLE</option>
+									<option value="user_nick"
+										<c:out value="${map.searchOption == 'user_nick'?'selected':''}"/>>NICKNAME</option>
+									<option value="m_content"
+										<c:out value="${map.searchOption == 'm_content'?'selected':''}"/>>CONTENT</option>
+								</select>
+							</div>
+							<div class="col-12 col-md-8 mb-3 mb-md-0">
+								<input name="keyword" value="${map.keyword}"
+									class="form-control form-control-lg1">
+							</div>
+						</div>
+<br>
+						<div class="form-row">
+							<div class="col-12 col-md-12 mb-3 mb-md-0">
+								<input type="submit" class="btn btn-block btn-lg btn-primary"
+									value="SEARCH">
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<!-- Icons Grid -->
+	<section class="features-icons bg-light text-center">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4">
+					<div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+						<div class="features-icons-icon d-flex">
+							<i class="icon-screen-desktop m-auto text-primary"></i>
+						</div>
+						<h3>Fully Responsive</h3>
+						<p class="lead mb-0">This theme will look great on any device,
+							no matter the size!</p>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+						<div class="features-icons-icon d-flex">
+							<i class="icon-layers m-auto text-primary"></i>
+						</div>
+						<h3>Bootstrap 4 Ready</h3>
+						<p class="lead mb-0">Featuring the latest build of the new
+							Bootstrap 4 framework!</p>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="features-icons-item mx-auto mb-0 mb-lg-3">
+						<div class="features-icons-icon d-flex">
+							<i class="icon-check m-auto text-primary"></i>
+						</div>
+						<h3>Easy to Use</h3>
+						<p class="lead mb-0">Ready to use with your own content, or
+							customize the source files!</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Image Showcases -->
+	<section class="showcase">
+		<div class="container-fluid p-0">
+			<div class="row no-gutters">
+
+				<div class="col-lg-6 order-lg-2 text-white showcase-img"
+					style="background-image: url('img/bg-showcase-1.jpg');"></div>
+				<div class="col-lg-6 order-lg-1 my-auto showcase-text">
+					<h2>Fully Responsive Design</h2>
+					<p class="lead mb-0">When you use a theme created by Start
+						Bootstrap, you know that the theme will look great on any device,
+						whether it's a phone, tablet, or desktop the page will behave
+						responsively!</p>
+				</div>
+			</div>
+			<div class="row no-gutters">
+				<div class="col-lg-6 text-white showcase-img"
+					style="background-image: url('img/bg-showcase-2.jpg');"></div>
+				<div class="col-lg-6 my-auto showcase-text">
+					<h2>Updated For Bootstrap 4</h2>
+					<p class="lead mb-0">Newly improved, and full of great utility
+						classes, Bootstrap 4 is leading the way in mobile responsive web
+						development! All of the themes on Start Bootstrap are now using
+						Bootstrap 4!</p>
+				</div>
+			</div>
+			<div class="row no-gutters">
+				<div class="col-lg-6 order-lg-2 text-white showcase-img"
+					style="background-image: url('img/bg-showcase-3.jpg');"></div>
+				<div class="col-lg-6 order-lg-1 my-auto showcase-text">
+					<h2>Easy to Use &amp; Customize</h2>
+					<p class="lead mb-0">Landing Page is just HTML and CSS with a
+						splash of SCSS for users who demand some deeper customization
+						options. Out of the box, just add your content and images, and
+						your new landing page will be ready to go!</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Testimonials -->
+	<section class="testimonials text-center bg-light">
+		<div class="container">
+			<h2 class="mb-5">What people are saying...</h2>
+			<div class="row">
+				<div class="col-lg-4">
+					<div class="testimonial-item mx-auto mb-5 mb-lg-0">
+						<img class="img-fluid rounded-circle mb-3"
+							src="img/testimonials-1.jpg" alt="">
+						<h5>Margaret E.</h5>
+						<p class="font-weight-light mb-0">"This is fantastic! Thanks
+							so much guys!"</p>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="testimonial-item mx-auto mb-5 mb-lg-0">
+						<img class="img-fluid rounded-circle mb-3"
+							src="img/testimonials-2.jpg" alt="">
+						<h5>Fred S.</h5>
+						<p class="font-weight-light mb-0">"Bootstrap is amazing. I've
+							been using it to create lots of super nice landing pages."</p>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="testimonial-item mx-auto mb-5 mb-lg-0">
+						<img class="img-fluid rounded-circle mb-3"
+							src="img/testimonials-3.jpg" alt="">
+						<h5>Sarah W.</h5>
+						<p class="font-weight-light mb-0">"Thanks so much for making
+							these free resources available to us!"</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Call to Action -->
+	<section class="call-to-action text-white text-center">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-9 mx-auto">
+					<h2 class="mb-4">Ready to get started? Sign up now!</h2>
+				</div>
+				<div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+					<form>
+						<div class="form-row">
+							<div class="col-12 col-md-9 mb-2 mb-md-0">
+								<input type="email" class="form-control form-control-lg"
+									placeholder="Enter your email...">
+							</div>
+							<div class="col-12 col-md-3">
+								<button type="submit" class="btn btn-block btn-lg btn-primary">Sign
+									up!</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<!-- Footer -->
+	<footer class="footer bg-light">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 h-100 text-center text-lg-left my-auto">
+					<ul class="list-inline mb-2">
+						<li class="list-inline-item"><a href="#">About</a></li>
+						<li class="list-inline-item">&sdot;</li>
+						<li class="list-inline-item"><a href="#">Contact</a></li>
+						<li class="list-inline-item">&sdot;</li>
+						<li class="list-inline-item"><a href="#">Terms of Use</a></li>
+						<li class="list-inline-item">&sdot;</li>
+						<li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+					</ul>
+					<p class="text-muted small mb-4 mb-lg-0">&copy; Start Bootstrap
+						2017. All Rights Reserved.</p>
+				</div>
+				 
+			</div>
+		</div>
+	</footer>
+
+	<!-- Bootstrap core JavaScript -->
+	<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+ 
+
 </body>
 </html>
