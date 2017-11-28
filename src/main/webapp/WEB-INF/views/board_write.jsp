@@ -35,6 +35,8 @@ div.boardwritestyle {
 	<%@ include file="menu.jsp"%>
 	<br>
 	<br>
+	<br>
+	<br>
 	<div class="boardwritestyle">
 		<center>
 			<button type="button" class="btn btn-outline-secondary">BOARD WRITE</button>

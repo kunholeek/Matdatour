@@ -16,35 +16,51 @@
 }
  */
 div.boarddetailstyle {
-	/* width: 500px; */
 	margin: 50px;
 }
 
 div.form-group {
-	/* width: 500px; */
 	margin: 50px;
 }
 
 #comments {
 	width: 40%;
 	margin: auto;
-	float: right;
+}
+
+.scroll_table table {
+	border-collapse: collapse;
+}
+
+.scroll_table tbody#tbody1 {
+	overflow-y: scroll;
+	display: table-caption;
+}
+
+#tbody2 {
+	overflow: hidden;
+}
+
+.scroll_table table th {
+	padding: 10px;
+}
+
+.scroll_table table td {
+	padding: 10px;
+}
+
+.scroll_table table td div {
+	display: block;
 }
 
 #leftcontent {
 	width: 40%;
 	float: left;
 }
-
-#tbody1 {
-	height: 200px;
-	overflow: auto;
-}
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
 <title>게시글</title>
 <script>
 	$(document).ready(
@@ -174,8 +190,6 @@ div.form-group {
 							</div>
 						</div>
  --%>
-
-
 						<div style="width: 650px; text-align: center;">
 
 							<!-- 게시물 hidden으로 처리 -->
@@ -198,33 +212,28 @@ div.form-group {
 				</td>
 			</tr>
 		</table>
-		<!-- ********************* 댓글 리스트**************************************  -->
+		<!-- ********************* 작성한 댓글 목록**************************************  -->
 		<br> <br>
-		<div>
+		<div class="scroll_table">
 			<table class="table table-striped table-hover table-bordered"
 				id="comments">
+
 				<hr>
-				<thead class="thead-dark" id="th1">
-					<tr>
-						<th>NickName</th>
-						<th>comment</th>
-					</tr>
-				</thead>
 				<!-- 리플 리스트  -->
-				<tbody id="tbody1">
+				<tbody id="tbody1" style="height: 400px;">
 
 					<c:forEach var="row" items="${commentlist}">
 						<tr>
-							<td>${row.c_replyer}</td>
-							<td>${row.c_comment}</td>
+
+							<td style="width: 20%">${row.c_replyer}</td>
+							<td style="width: 70%">${row.c_comment}</td>
 						</tr>
 					</c:forEach>
-
 				</tbody>
-				<!-- 리플 리스트  -->
+				<!-- ******************************************  -->
 
 				<!-- 리플 등록  -->
-				<tbody>
+				<tbody id="tbody2">
 					<tr>
 						<td colspan="2">
 							<!-- **로그인 한 회원에게만 댓글 작성폼이 보이게 처리 --> <c:if
@@ -242,7 +251,7 @@ div.form-group {
 				<!-- 리플 등록  -->
 			</table>
 		</div>
-
+		<!-- **************************************************************************************  -->
 	</div>
 
 	<!-- ********************* 댓글 등록**************************************  -->
@@ -251,6 +260,7 @@ div.form-group {
 		<input type="hidden" id="user_num" value="${sessionScope.user_num }">
 		<input type="hidden" id="user_nick" value="${sessionScope.user_nick}">
 
-	</div> 
+	</div>
+
 </body>
 </html>
