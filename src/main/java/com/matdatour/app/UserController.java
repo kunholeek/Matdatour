@@ -85,6 +85,12 @@ public class UserController {
 		return "user_write";
 	}
 
+	// 5. 회원 등록 페이지로 이동
+	@RequestMapping("/mapview.do")
+	public String mapview() {
+		return "mapview";
+	}
+
 	// 6. 회원 등록 처리 후 목록으로 redirect
 	@RequestMapping("/insert.do")
 	public ModelAndView userInsert(@ModelAttribute UserDTO userdto) {
@@ -92,20 +98,21 @@ public class UserController {
 		String userIDChk = userdto.getUser_id();
 		String userNickChk = userdto.getUser_nick();
 		String userPhoneChk = userdto.getUser_phone();
-		if (userService.selectByID(userIDChk) == null && userService.selectByNick(userNickChk)==null&& userService.selectByPhone(userPhoneChk)==null) {
+		if (userService.selectByID(userIDChk) == null && userService.selectByNick(userNickChk) == null
+				&& userService.selectByPhone(userPhoneChk) == null) {
 			userService.serv_userInsert(userdto);
 			mav.setViewName("login");
-		} else if(userService.selectByID(userIDChk) != null){
+		} else if (userService.selectByID(userIDChk) != null) {
 			mav.setViewName("user_write");
 			mav.addObject("msg1", "idfail");
-		}else if(userService.selectByNick(userNickChk)!=null){
+		} else if (userService.selectByNick(userNickChk) != null) {
 			mav.setViewName("user_write");
 			mav.addObject("msg1", "nickfail");
-		}else if(userService.selectByPhone(userPhoneChk)!=null){
+		} else if (userService.selectByPhone(userPhoneChk) != null) {
 			mav.setViewName("user_write");
 			mav.addObject("msg1", "phonefail");
-			
-		}else{
+
+		} else {
 			mav.setViewName("user_write");
 			mav.addObject("msg1", "IdNICKfail");
 		}
@@ -137,53 +144,56 @@ public class UserController {
 		userService.serv_userUpdate(userdto);
 		return "redirect:home.do";
 	}
-	//회원 아이디 찾기
+
+	// 회원 아이디 찾기
 	@RequestMapping("/findId.do")
-	public String findId(){
+	public String findId() {
 		return "findID";
 	}
+
 	@RequestMapping("/find.do")
-	public ModelAndView userfind(@RequestParam String user_phone){
+	public ModelAndView userfind(@RequestParam String user_phone) {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("입력한 폰번호 >>>"+user_phone);
-			UserDTO userdto = null;
-			if(userService.selectByPhone(user_phone)!=null){
-				userdto = userService.selectByPhone(user_phone);
-				String user_id = userdto.getUser_id();
-				mav.setViewName("findID");
-				mav.addObject("user_id", user_id);
-			}else{
-				mav.setViewName("findID");
-				mav.addObject("msg", "전화번호를 잘못 입력하셨습니다");
-				
-			}
+		System.out.println("입력한 폰번호 >>>" + user_phone);
+		UserDTO userdto = null;
+		if (userService.selectByPhone(user_phone) != null) {
+			userdto = userService.selectByPhone(user_phone);
+			String user_id = userdto.getUser_id();
+			mav.setViewName("findID");
+			mav.addObject("user_id", user_id);
+		} else {
+			mav.setViewName("findID");
+			mav.addObject("msg", "전화번호를 잘못 입력하셨습니다");
+
+		}
 		return mav;
 	}
-	//회원 비밀번호찾기
+
+	// 회원 비밀번호찾기
 	@RequestMapping("/findPWD.do")
-	public String findPwd(){
+	public String findPwd() {
 		return "findPWD";
 	}
-	
+
 	@RequestMapping("/findpw.do")
-	public ModelAndView findpw(@RequestParam String user_id, String user_phone){
+	public ModelAndView findpw(@RequestParam String user_id, String user_phone) {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("입력한 ID >>>"+user_id);
-		System.out.println("입력한 폰번호 >>>"+user_phone);
+		System.out.println("입력한 ID >>>" + user_id);
+		System.out.println("입력한 폰번호 >>>" + user_phone);
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("user_id", user_id);
 		map.put("user_phone", user_phone);
-		UserDTO userdto =null;
-		if(userService.userPwdCheck(map) ==null){
+		UserDTO userdto = null;
+		if (userService.userPwdCheck(map) == null) {
 			mav.setViewName("findPWD");
 			mav.addObject("msg", "ID 또는 전화번호를 잘못 입력하셨습니다.");
-		}else{
+		} else {
 			userdto = userService.userPwdCheck(map);
 			String user_pwd = userdto.getUser_pwd();
 			mav.setViewName("findPWD");
 			mav.addObject("user_pwd", user_pwd);
 		}
-		
+
 		return mav;
 	}
 }

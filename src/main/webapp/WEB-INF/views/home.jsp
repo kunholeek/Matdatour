@@ -158,6 +158,9 @@
 					</div>
 				</div>
 				<div class="col-lg-4">
+					<div class="testimonial-item mx-auto mb-5 mb-lg-0"></div>
+				</div>
+				<div class="col-lg-4">
 					<div class="testimonial-item mx-auto mb-5 mb-lg-0">
 						<img class="img-fluid rounded-circle mb-3"
 							src="../img/squirtle.png" alt="">
@@ -175,16 +178,11 @@
 		<div class="overlay"></div>
 		<div class="container">
 			<div class="row">
-				<div class="col-xl-9 mx-auto">
-					<h2 class="mb-4">Ready to get started? Sign up now!</h2>
-				</div>
+
 				<div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
 					<form>
 						<div class="form-row">
-							<div class="col-12 col-md-12">
-								<button type="button" id="userWrite" class="btn btn-primary">
-									SIGN UP</button>
-							</div>
+							<div class="col-12 col-md-12"></div>
 						</div>
 					</form>
 				</div>

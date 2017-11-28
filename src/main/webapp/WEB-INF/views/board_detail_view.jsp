@@ -61,6 +61,8 @@ div.form-group {
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ed6070bb4d07348ab14113cdaebe6664&libraries=services"></script>
 <title>게시글</title>
 <script>
 	$(document).ready(
@@ -93,13 +95,19 @@ div.form-group {
 									alert("댓글이 등록되었습니다.");
 									listReply();
 									history.go(0);
-									1
 								}
 							});
 						});
 
-				/* ********************************************* */
+				/* ************************toggle********************* */
 
+				$("#mapbutton").click(function() { 
+					$(".collapse").collapse('toggle');
+
+					/* $(".map_wrap").css({"display": "block", "height":"0", "overflow":"hidden" }); 
+					$("#map").css({"display": "block", "height":"auto" }); */
+
+				});
 				/************************************************************************************************/
 				$("#btnDelete").click(function() {
 					if (confirm("삭제하시겠습니까?")) {
@@ -138,6 +146,7 @@ div.form-group {
 		});
 	}
 
+ 
 	/********************************************************************************************************/
 </script>
 </head>
@@ -149,8 +158,15 @@ div.form-group {
 	<br>
 	<div class="boarddetailstyle">
 		<button type="button"
-			class="btn btn-outline-secondary btn-lg btn-block">BOARD
+			class="btn btn-outline-secondary btn-lg btn-block" id="mapbutton">BOARD
 			DETAIL</button>
+
+		<!--**************************** MAP 띄우기 ****************************-->
+		<div class="collapse">
+			<%@include file="mapview.jsp"%></div>
+
+
+		<!-- ****************************************************************** -->
 		<table id="leftcontent">
 			<tr>
 				<td>
@@ -260,6 +276,7 @@ div.form-group {
 		<input type="hidden" id="user_num" value="${sessionScope.user_num }">
 		<input type="hidden" id="user_nick" value="${sessionScope.user_nick}">
 
+	</div>
 	</div>
 
 </body>

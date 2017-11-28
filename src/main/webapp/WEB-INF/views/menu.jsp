@@ -99,7 +99,7 @@
 
 
 					<li class="nav-item"><a class="nav-link active"
-						href="../user/home.do">Tip <span class="sr-only">(current)</span></a>
+						href="../user/mapview.do">Tip <span class="sr-only">(current)</span></a>
 					</li>
 
 				</c:otherwise>
