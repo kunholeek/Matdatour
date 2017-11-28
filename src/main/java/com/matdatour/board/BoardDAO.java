@@ -23,6 +23,7 @@ public interface BoardDAO {
 	public int boardUpdate(BoardDTO boarddto);
 
 	public int boardDelete(int board_num);
+	public int boardDeleteByID(int user_num);
 	
 	
 	public String fileUpload(MultipartHttpServletRequest mRequest);

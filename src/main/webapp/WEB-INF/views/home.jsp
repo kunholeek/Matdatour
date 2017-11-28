@@ -20,10 +20,11 @@
 	$(document).ready(function() {
 		$("#btnSearch").click(function() {
 
-			alert($("#search"));
+			 alert($("#search")); 
 
 		});
 	});
+
 </script>
 
 <!-- Bootstrap core CSS -->
@@ -60,7 +61,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xl-9 mx-auto">
-					<h1 class="mb-5">Welcome to Matdatour</h1>
+					<h1 class="mb-5"><font color="white">Welcome to Matdatour</font></h1>
 				</div>
 				<div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
 					<!-- 검색기능 -->
@@ -84,11 +85,13 @@
 									class="form-control form-control-lg1">
 							</div>
 						</div>
-<br>
+						<br>
 						<div class="form-row">
 							<div class="col-12 col-md-12 mb-3 mb-md-0">
-								<input type="submit" class="btn btn-block btn-lg btn-primary"
+							<c:if test="${sessionScope.user_id != null }">
+								<input type="submit"  class="btn btn-block btn-lg btn-primary"
 									value="SEARCH">
+							</c:if>
 							</div>
 						</div>
 					</form>

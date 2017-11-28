@@ -1,6 +1,8 @@
 package com.matdatour.app;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,8 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.matdatour.board.BoardService;
 import com.matdatour.user.UserDTO;
 import com.matdatour.user.UserService;
 
@@ -23,6 +27,8 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
+	@Autowired
+	BoardService boardService;
 
 	// 1. 로그인 화면
 	@RequestMapping("/login.do")
@@ -81,9 +87,41 @@ public class UserController {
 
 	// 6. 회원 등록 처리 후 목록으로 redirect
 	@RequestMapping("/insert.do")
-	public String userInsert(@ModelAttribute UserDTO userdto) {
-		userService.serv_userInsert(userdto);
-		return "redirect:login.do";
+	public ModelAndView userInsert(@ModelAttribute UserDTO userdto) {
+		ModelAndView mav = new ModelAndView();
+		String userIDChk = userdto.getUser_id();
+		String userNickChk = userdto.getUser_nick();
+		String userPhoneChk = userdto.getUser_phone();
+		if (userService.selectByID(userIDChk) == null && userService.selectByNick(userNickChk)==null&& userService.selectByPhone(userPhoneChk)==null) {
+			userService.serv_userInsert(userdto);
+			mav.setViewName("login");
+		} else if(userService.selectByID(userIDChk) != null){
+			mav.setViewName("user_write");
+			mav.addObject("msg1", "idfail");
+		}else if(userService.selectByNick(userNickChk)!=null){
+			mav.setViewName("user_write");
+			mav.addObject("msg1", "nickfail");
+		}else if(userService.selectByPhone(userPhoneChk)!=null){
+			mav.setViewName("user_write");
+			mav.addObject("msg1", "phonefail");
+			
+		}else{
+			mav.setViewName("user_write");
+			mav.addObject("msg1", "IdNICKfail");
+		}
+		return mav;
+	}
+
+	@RequestMapping("/delete.do")
+	public String userDelete(@RequestParam String user_id) {
+		UserDTO userdto = new UserDTO();
+		userdto = userService.selectByID(user_id);
+		int user_num = userdto.getUser_num();
+		System.out.println(user_num);
+		boardService.boardDeleteByID(user_num);
+		userService.serv_userDelete(user_id);
+		return "redirect:list.do";
+
 	}
 
 	// 7. 회원 등록 페이지로 이동
@@ -98,6 +136,54 @@ public class UserController {
 	public String memberUpdate(@ModelAttribute UserDTO userdto) {
 		userService.serv_userUpdate(userdto);
 		return "redirect:home.do";
-
+	}
+	//회원 아이디 찾기
+	@RequestMapping("/findId.do")
+	public String findId(){
+		return "findID";
+	}
+	@RequestMapping("/find.do")
+	public ModelAndView userfind(@RequestParam String user_phone){
+		ModelAndView mav = new ModelAndView();
+		System.out.println("입력한 폰번호 >>>"+user_phone);
+			UserDTO userdto = null;
+			if(userService.selectByPhone(user_phone)!=null){
+				userdto = userService.selectByPhone(user_phone);
+				String user_id = userdto.getUser_id();
+				mav.setViewName("findID");
+				mav.addObject("user_id", user_id);
+			}else{
+				mav.setViewName("findID");
+				mav.addObject("msg", "전화번호를 잘못 입력하셨습니다");
+				
+			}
+		return mav;
+	}
+	//회원 비밀번호찾기
+	@RequestMapping("/findPWD.do")
+	public String findPwd(){
+		return "findPWD";
+	}
+	
+	@RequestMapping("/findpw.do")
+	public ModelAndView findpw(@RequestParam String user_id, String user_phone){
+		ModelAndView mav = new ModelAndView();
+		System.out.println("입력한 ID >>>"+user_id);
+		System.out.println("입력한 폰번호 >>>"+user_phone);
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("user_id", user_id);
+		map.put("user_phone", user_phone);
+		UserDTO userdto =null;
+		if(userService.userPwdCheck(map) ==null){
+			mav.setViewName("findPWD");
+			mav.addObject("msg", "ID 또는 전화번호를 잘못 입력하셨습니다.");
+		}else{
+			userdto = userService.userPwdCheck(map);
+			String user_pwd = userdto.getUser_pwd();
+			mav.setViewName("findPWD");
+			mav.addObject("user_pwd", user_pwd);
+		}
+		
+		return mav;
 	}
 }

@@ -1,6 +1,7 @@
 package com.matdatour.user;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -41,8 +42,8 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public int userDelete(int user_num) {
-		return sqlSession.delete(namespace + "userDelete", user_num);
+	public int userDelete(String user_id) {
+		return sqlSession.delete(namespace + "userDelete", user_id);
 	}
 
 	//로그인 체크
@@ -68,6 +69,24 @@ public class UserDAOImpl implements UserDAO {
 	public UserDTO selectByUserNum(int user_num) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace + "selectByUserId", user_num);
+	}
+
+	@Override
+	public UserDTO selectByPhone(String user_phone)   {
+		// TODO Auto-generated method stub
+		return  sqlSession.selectOne(namespace+"selectByUserPhone", user_phone) ;
+	}
+
+	@Override
+	public UserDTO selectByNick(String user_nick) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+"selectByUserNick", user_nick);
+	}
+
+	@Override
+	public UserDTO userPwdCheck(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+"checkPwd", map);
 	}
 
 }

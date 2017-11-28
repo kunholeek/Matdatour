@@ -34,28 +34,12 @@ div.loginstyle {
 
 <title>맛다퉈 - 로그인</title>
 <script>
-	$(document).ready(function() {
-		$("#btnLogin").click(function() {
-			// 태크.val() : 태그에 입력된 값
-			// 태크.val("값") : 태그의 값을 변경 
-			var user_id = $("#user_id").val();
-			var user_pwd = $("#user_pwd").val();
-			if (user_id == "") {
-				alert("아이디를 입력하세요.");
-				$("#user_id").focus(); // 입력포커스 이동
-				return; // 함수 종료
-			}
-			if (user_pwd == "") {
-				alert("아이디를 입력하세요.");
-				$("#user_pwd").focus();
-				return;
-			}
-			// 폼 내부의 데이터를 전송할 주소
-			document.login.action = "loginCheck.do"
-			// 제출
-			document.login.submit();
-		});
-	});
+
+	function searchPWD() {
+		f.action = "findpw.do";
+		f.method = "get";
+		f.submit();
+	}
 </script>
 </head>
 <body>
@@ -72,38 +56,37 @@ div.loginstyle {
 	<div class="loginstyle">
 		<center>
 			<button type="button"
-				class="btn btn-outline-secondary btn-lg btn-block">LOGIN</button>
-			<form name="login" action="home.jsp" method="post">
+				class="btn btn-outline-secondary btn-lg btn-block">SEARCH PASSWORD</button>
+			<form name="f" action="find.do" method="post">
 				<table class="table table-striped table-hover table-bordered">
 					<tbody class="tbody-dark">
+					
 						<tr align="center">
-							<td>아이디</td>
+							<td>ID</td>
 							<td><input type="text"  class="form-control" name="user_id" id="user_id"></td>
-						</tr>
-
+							</tr>
 						<tr align="center">
-							<td>비밀번호</td>
-							<td><input type="password"  class="form-control" name="user_pwd" id="user_pwd"></td>
+							<td>전화번호</td>
+							<td><input type="text"  class="form-control" name="user_phone" id="user_phone"></td>
 						</tr>
 						<tr>
 							<td colspan="2" align="center">
-								<button type="button" id="btnLogin" class="btn btn-secondary">로그인</button>
+								<button type="button" onclick="searchPWD()" class="btn btn-secondary">찾기</button>
 								<br>
-								
-								<c:if test="${msg == 'failure'}">
-									<div style="color: red">아이디 또는 비밀번호가 일치하지 않습니다.</div>
-								</c:if> <c:if test="${msg == 'logout'}">
-									<div style="color: red">로그아웃되었습니다.</div>
-								</c:if>
 							</td>
 						</tr>
-						
 					</tbody>
 				</table>
-				<div><p style="text-align:right;"><a href="../user/findId.do"> 아이디 찾기</a> <a href= "../user/findPWD.do">비밀번호 찾기</a></p></div>
-	</div>
+				<div>
+				<div style="color: red">${msg }</div>
+				<c:if test="${user_pwd != null}">
+									<div style="color: red">회원님의 비밀번호는 <b>${user_pwd }</b> 입니다.</div>
+				</c:if>
+				
+				</div>
 
 	</form>
 	</center>
+	</div>
 </body>
 </html>

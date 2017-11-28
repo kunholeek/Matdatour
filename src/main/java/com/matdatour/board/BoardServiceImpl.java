@@ -128,5 +128,11 @@ public class BoardServiceImpl implements BoardService {
 		}
 		return isSuccess;
 	}
+
+	@Override
+	public int boardDeleteByID(int user_num) {
+		// TODO Auto-generated method stub
+		return board.boardDeleteByID(user_num);
+	}
 	
 }
