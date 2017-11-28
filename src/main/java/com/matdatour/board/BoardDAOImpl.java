@@ -56,4 +56,10 @@ public class BoardDAOImpl implements BoardDAO {
 		return null;
 	}
 
+	@Override
+	public int boardDeleteByID(int user_num) {
+	
+		return sqlSession.delete(namespace+"boardDelete2", user_num);
+	}
+
 }

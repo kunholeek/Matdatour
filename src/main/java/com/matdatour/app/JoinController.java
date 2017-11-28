@@ -35,7 +35,7 @@ public class JoinController {
 
 		return "board_list";
 	}
-
+	//게시물 검색
 	@RequestMapping(value = "search.do", method = RequestMethod.POST)
 	public ModelAndView slist(@RequestParam(defaultValue = "title") String searchOption,
 			@RequestParam(defaultValue = "") String keyword) {
@@ -50,6 +50,8 @@ public class JoinController {
 		    mav.setViewName("search_list"); // 뷰를 list.jsp로 설정
 		    return mav; // list.jsp로 List가 전달된다.
 	}
+	
+	//레시피 리스트
 	@RequestMapping(value="rlist.do", method=RequestMethod.GET)
 	public String rlist(String board_group, Model model) throws Exception {
 		System.out.println("list >> "+ board_group);

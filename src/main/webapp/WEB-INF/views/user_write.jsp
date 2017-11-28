@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -66,13 +67,25 @@ div.userwritestyle {
 					<td><input type="text" class="form-control" name="user_phone"></td>
 					</tr>
 					<tr>
-						<td colspan="2" align="center"><button type="submit"
-								class="btn btn-outline-secondary
-							value="확인">
-								Submit
-								<button type="reset" class="btn btn-outline-secondary value="취소">Cancel</td>
+						<td colspan="2" align="center">
+							<button type="submit" class="btn btn-outline-secondary value="확인">Submit
+							<button type="reset" class="btn btn-outline-secondary value="취소">Cancel
+						</td>
+								
 					</tr>
 				</table>
+					<c:if test="${msg1 == 'idfail'}">
+									<div style="color: red">아이디 증복</div>
+					</c:if>
+					<c:if test="${msg1 == 'nickfail'}">
+									<div style="color: red">닉네임 증복</div>
+					</c:if>
+					<c:if test="${msg1 == 'IdNICKfail'}">
+									<div style="color: red">아이디 및 닉네임 중복</div>
+					</c:if>
+					<c:if test="${msg1 == 'phonefail'}">
+									<div style="color: red">전화번호 중복</div>
+					</c:if>
 			</form>
 		</center>
 </body>

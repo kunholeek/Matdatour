@@ -67,7 +67,9 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xl-9 mx-auto">
-					<h1 class="mb-5">Welcome to Matdatour</h1>
+					<h1 class="mb-5">
+						<font color="white">Welcome to Matdatour</font>
+					</h1>
 				</div>
 				<div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
 					<!-- 검색기능 -->
@@ -95,8 +97,10 @@
 						<br>
 						<div class="form-row">
 							<div class="col-12 col-md-12 mb-3 mb-md-0">
-								<input type="submit" class="btn btn-block btn-lg btn-primary"
-									value="SEARCH">
+								<c:if test="${sessionScope.user_id != null }">
+									<input type="submit" class="btn btn-block btn-lg btn-primary"
+										value="SEARCH">
+								</c:if>
 							</div>
 						</div>
 					</form>
@@ -139,7 +143,7 @@
 			</div>
 		</div>
 	</section>
- 
+
 	<!-- Testimonials -->
 	<section class="testimonials text-center bg-light">
 		<div class="container">
@@ -158,7 +162,8 @@
 						<img class="img-fluid rounded-circle mb-3"
 							src="../img/squirtle.png" alt="">
 						<h5>Lee Jeongwook</h5>
-						<p class="font-weight-light mb-0">"국내 최고의 맛집 공유 커뮤니티로 만들고 싶습니다"</p>
+						<p class="font-weight-light mb-0">"국내 최고의 맛집 공유 커뮤니티로 만들고
+							싶습니다"</p>
 					</div>
 				</div>
 			</div>

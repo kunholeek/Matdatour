@@ -22,6 +22,7 @@ public interface BoardService {
 	public int serv_boardUpdate(BoardDTO board);
 
 	public int serv_boardDelete(int board_num);
+	public int boardDeleteByID(int user_num);
 
 	public String fileUpload(MultipartHttpServletRequest mRequest);
 

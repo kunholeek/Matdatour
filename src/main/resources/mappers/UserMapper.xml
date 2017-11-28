@@ -30,6 +30,18 @@
 		user_pwd =
 		#{user_pwd}
 	</select>
+	
+	<select id="checkPwd" resultType="userdto" >
+		SELECT
+		user_num,
+		user_id,
+		user_nick,
+		user_pwd
+		FROM mat_user
+		WHERE user_id = #{user_id} AND
+		user_phone =
+		#{user_phone}
+	</select>
 
 
 	<!-- 유저 등록 -->
@@ -50,18 +62,35 @@
 	</select>
 
 	<select id="selectByUserId" resultType="userdto" parameterType="String">
-		select user_id,
+		select user_num, user_id,
 		user_pwd, user_nick, user_phone
 		from mat_user
 		where
 		user_id=#{user_id}
 	</select>
+	
 	<select id="selectByUserNum" resultType="userdto" parameterType="int">
 		select user_id,
 		user_pwd, user_nick, user_phone
 		from mat_user
 		where
 		user_num=#{aa}
+	</select>
+	
+	<select id="selectByUserPhone" resultType="userdto" parameterType="string">
+		select user_num, user_id,
+		user_pwd, user_nick, user_phone
+		from mat_user
+		where
+		user_phone=#{user_phone}
+	</select>
+	
+	<select id="selectByUserNick" resultType="userdto" parameterType="string">
+		select user_num, user_id,
+		user_pwd, user_nick, user_phone
+		from mat_user
+		where
+		user_nick=#{aa}
 	</select>
 
 
@@ -71,12 +100,10 @@
 		where user_id=#{user_id}
 	</update>
 
-	<delete id="userDelete" parameterType="int">
+	<delete id="userDelete" parameterType="string">
 		delete from mat_user
 		where
 		user_id=#{user_id}
-		and
-		user_pwd=#{user_pwd}
 	</delete>
 </mapper>
 

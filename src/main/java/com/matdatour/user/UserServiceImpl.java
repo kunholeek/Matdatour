@@ -1,6 +1,7 @@
 package com.matdatour.user;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -47,8 +48,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int serv_userDelete(int user_num) {
-		return user.userDelete(user_num);
+	public int serv_userDelete(String user_id) {
+		return user.userDelete(user_id);
 	}
 
 	// 1. 회원 로그인 체크
@@ -86,6 +87,24 @@ public class UserServiceImpl implements UserService {
 	public UserDTO selectByUserNum(int user_num) {
 		// TODO Auto-generated method stub
 		return user.selectByUserNum(user_num);
+	}
+
+	@Override
+	public UserDTO selectByPhone(String user_phone)  {
+		// TODO Auto-generated method stub
+		return user.selectByPhone(user_phone);
+	}
+
+	@Override
+	public UserDTO selectByNick(String user_nick) {
+		// TODO Auto-generated method stub
+		return user.selectByNick(user_nick);
+	}
+
+	@Override
+	public UserDTO userPwdCheck(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return user.userPwdCheck(map);
 	}
 
 }
