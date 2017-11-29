@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page session="true"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <style>
@@ -16,8 +16,11 @@
 }
  */
 div.boarddetailstyle {
-	margin: 50px;
+	margin: 60px;
+	bottom: 30px;
 }
+
+ 
 
 div.form-group {
 	margin: 50px;
@@ -55,7 +58,11 @@ div.form-group {
 
 #leftcontent {
 	width: 40%;
-	float: left;
+	float: left; 
+}
+
+.footer {
+	clear: both; 
 }
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -101,7 +108,7 @@ div.form-group {
 
 				/* ************************toggle********************* */
 
-				$("#mapbutton").click(function() { 
+				$("#mapbutton").click(function() {
 					$(".collapse").collapse('toggle');
 
 					/* $(".map_wrap").css({"display": "block", "height":"0", "overflow":"hidden" }); 
@@ -146,7 +153,6 @@ div.form-group {
 		});
 	}
 
- 
 	/********************************************************************************************************/
 </script>
 </head>
@@ -161,12 +167,7 @@ div.form-group {
 			class="btn btn-outline-secondary btn-lg btn-block" id="mapbutton">BOARD
 			DETAIL</button>
 
-		<!--**************************** MAP 띄우기 ****************************-->
-		<div class="collapse">
-			<%@include file="mapview.jsp"%></div>
 
-
-		<!-- ****************************************************************** -->
 		<table id="leftcontent">
 			<tr>
 				<td>
@@ -192,7 +193,9 @@ div.form-group {
 							<div>
 								NICKNAME : <b>${nick}</b>
 							</div>
-							<br> ${dto.m_content}<br>
+							<div>
+								<br> ${dto.m_content}<br>
+							</div>
 						</div>
 						<br> <br>
 
@@ -206,7 +209,7 @@ div.form-group {
 							</div>
 						</div>
  --%>
-						<div style="width: 650px; text-align: center;">
+						<div style="width: 650px; text-align: center; position: relative;">
 
 							<!-- 게시물 hidden으로 처리 -->
 							<input type="hidden" name="board_num" value="${dto.board_num}">
@@ -224,7 +227,10 @@ div.form-group {
 							</c:if>
 							<button type="button" id="btnList" class="btn btn-outline-danger">목록</button>
 						</div>
-					</form>
+					</form> 
+						 
+						<br>
+						<br>
 				</td>
 			</tr>
 		</table>
@@ -236,7 +242,7 @@ div.form-group {
 
 				<hr>
 				<!-- 리플 리스트  -->
-				<tbody id="tbody1" style="height: 400px;">
+				<tbody id="tbody1" style="height: 600px;">
 
 					<c:forEach var="row" items="${commentlist}">
 						<tr>
@@ -268,16 +274,28 @@ div.form-group {
 			</table>
 		</div>
 		<!-- **************************************************************************************  -->
+		<!-- ********************* 댓글 등록**************************************  -->
+		<div class="form-group">
+			<input type="hidden" id="board_num" value="${dto.board_num }">
+			<input type="hidden" id="user_num" value="${sessionScope.user_num }">
+			<input type="hidden" id="user_nick" value="${sessionScope.user_nick}">
+		</div>
+		<!-- **************************************************************************************  -->
 	</div>
+	<!-- ******************************table 2개 div 끝****************************  -->
 
-	<!-- ********************* 댓글 등록**************************************  -->
-	<div class="form-group">
-		<input type="hidden" id="board_num" value="${dto.board_num }">
-		<input type="hidden" id="user_num" value="${sessionScope.user_num }">
-		<input type="hidden" id="user_nick" value="${sessionScope.user_nick}">
-
-	</div>
-	</div>
-
+	<!--**************************** MAP 띄우기 ****************************-->
+ 
+	<footer>
+ 
+		<div class="footer">
+			<table> 
+				<tr>
+					<td><%@include file="mapview.jsp"%></td>
+				</tr>
+			</table>
+		</div>
+	</footer>
+	<!-- ****************************************************************** -->
 </body>
 </html>
