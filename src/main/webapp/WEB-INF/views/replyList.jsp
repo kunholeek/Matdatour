@@ -9,14 +9,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-ddddddd
+
 	<table style="width: 700px">
 		<c:forEach var="row" items="${replyList}">
 			<tr>
 				<td>${row.user_nick}
 				<td><fmt:formatDate value="${row.regdate}" pattern="yyyy-MM-dd" />
 				<td>${row.c_comment}</td>
-				
+				<td><button>X</button></td>
 			</tr>
 
 

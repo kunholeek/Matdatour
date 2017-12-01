@@ -93,6 +93,7 @@ public class BoardController {
 		mav.addObject("commentlist", cmlist);
 		mav.addObject("dto", boardService.detailView(board_num));
 		mav.addObject("nick", user_nick);
+		
 		return mav;
 	}
 

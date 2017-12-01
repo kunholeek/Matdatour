@@ -1,6 +1,7 @@
 package com.matdatour.comment;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -37,13 +38,13 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public void commentUpdate(CommentDTO commentdto) {
-		 
+	public void commentUpdate(Map<Object, Object> map) {
+		 comment.commentUpdate(map);
 	}
 
 	@Override
 	public void commentDelete(int c_num) {
-		 
+		 comment.commentDelete(c_num);
 	}
 
 	 

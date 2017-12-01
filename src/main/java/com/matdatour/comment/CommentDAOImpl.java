@@ -29,13 +29,13 @@ public class CommentDAOImpl implements CommentDAO {
 	}
 
 	@Override
-	public int commentUpdate(CommentDTO commentdto) {
-		return sqlSession.update(namespace + "commentUpdate", commentdto);
+	public int commentUpdate(Map<Object, Object> map) {
+		return sqlSession.update(namespace + "commentUpdate", map);
 	}
 
 	@Override
-	public int commentDelete(int user_num) {
-		return sqlSession.delete(namespace + "commentDelete", user_num);
+	public int commentDelete(int c_num) {
+		return sqlSession.delete(namespace + "commentDelete", c_num);
 	}
  
 

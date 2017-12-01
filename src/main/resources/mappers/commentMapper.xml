@@ -18,7 +18,7 @@
 	</insert>
 
 
-	<update id="commentUpdate">
+	<update id="commentUpdate" parameterType ="map">
 		update mat_comment set
 		c_comment=#{c_comment}
 		where c_num = #{c_num}
@@ -30,7 +30,5 @@
 		delete from mat_comment
 		where
 		c_num=#{c_num}
-		and
-		user_num=#{user_num}
 	</delete>
 </mapper>

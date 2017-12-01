@@ -2,6 +2,7 @@ package com.matdatour.app;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.matdatour.comment.CommentDTO;
 import com.matdatour.comment.CommentService;
+import com.matdatour.user.UserDTO;
+import com.matdatour.user.UserService;
 
 //REST : Representational State Transfer
 //하나의 URI가 하나의 고유한 리소스를 대표하도록 설계된 개념
@@ -34,6 +37,8 @@ public class CommentController {
 
 	@Autowired
 	CommentService commentService;
+	@Autowired
+	UserService userService;
 
 	// 댓글 입력
 	@RequestMapping(value = "/reply/insert.do", method = RequestMethod.POST)
@@ -64,23 +69,6 @@ public class CommentController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("replyList");
 		return "redirect:board/view.do?board_num=" + board_num;
-
-	}
-
-	@RequestMapping(value = "/reply/update/{c_num}", method = { RequestMethod.PUT, RequestMethod.PATCH })
-	public ResponseEntity<String> replyUpdate(@PathVariable("c_num") Integer c_num,
-			@RequestBody CommentDTO commentdto) {
-		ResponseEntity<String> entity = null;
-		try {
-			commentdto.setC_num(c_num);
-			commentService.commentUpdate(commentdto);
-			entity = new ResponseEntity<String>("success", HttpStatus.OK);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-		}
-		return entity;
 
 	}
 

@@ -98,10 +98,10 @@
 					</li>
 
 
-					<li class="nav-item"><a class="nav-link active"
+			<!-- 		<li class="nav-item"><a class="nav-link active"
 						href="../user/mapview.do">Tip <span class="sr-only">(current)</span></a>
 					</li>
-
+ -->
 				</c:otherwise>
 			</c:choose>
 		</ul>
